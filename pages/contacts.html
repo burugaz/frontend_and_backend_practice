@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Семестровая работа</title>
+</head>
+<body>
+    <div id="header">Хэдер</div>
+
+    <div id="menu">
+        <ul>
+            <li><a href="../index.html">Главная</a></li>
+            <li><a href="news.html">Новости</a></li>
+            <li><a href="practices.html">Практики</a></li>
+            <li><a href="goods.html">Товары</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+    </div>
+
+    <div id="content">
+        <h1>Контакты</h1>
+
+        <div class="contact-info">
+            <h2>Свяжитесь с нами</h2>
+
+            <p><strong>Электронная почта:</strong></p>
+            <p><a href="mcdoni@gmail.com">info@example.com</a></p>
+
+            <p><strong>Адрес:</strong></p>
+            <p>г. Москва, ул. Пушкина, д. Колотушкина, офис 123</p>
+            <p>123456, Россия</p>
+
+            <p><strong>Телефон:</strong></p>
+            <p>+7 (495) 123-45-67</p>
+
+            <button onclick="callMe()">Позвоните мне</button>
+
+            <p><em>Нажмите кнопку "Позвоните мне", и мы перезвоним вам в ближайшее время</em></p>
+        </div>
+    </div>
+
+    <div id="footer">Футер</div>
+
+    <script>
+        function callMe() {
+            let phone = prompt("Пожалуйста, введите ваш номер телефона:", "+7 (___) ___-____");
+            if (phone) {
+                alert("Спасибо! Мы перезвоним вам на номер: " + phone + " в течение 15 минут.");
+            }
+        }
+    </script>
+</body>
+</html>
