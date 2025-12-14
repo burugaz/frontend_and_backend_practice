@@ -485,6 +485,7 @@ body {
 /* МОДИФИКАТОРЫ button */
 .button--primary {
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    margin-top: var(--border-radius-lg);
     color: var(--color-white);
 }
 
@@ -497,6 +498,7 @@ body {
     background: var(--color-light);
     color: var(--color-dark);
     border: 2px solid var(--color-light-dark);
+    margin-top: var(--border-radius-lg);
 }
 
 .button--secondary:hover {

@@ -45,6 +45,10 @@
                         <h3 class="product-card__name">Очки умного человека</h3>
                         <p class="product-card__price">1 999 руб.</p>
                         <p class="experience-card__desc">Стильные очки для настоящих интеллектуалов.</p>
+                        <!-- ДОБАВЛЕНА КНОПКА -->
+                        <button class="button button--primary product-card__button" onclick="addToCart('Очки умного человека', 1999)">
+                            Добавить в корзину
+                        </button>
                     </article>
 
                     <article class="product-card">
@@ -55,6 +59,10 @@
                             1 499 руб.
                         </p>
                         <p class="experience-card__desc">Увлекательная литература для расширения кругозора.</p>
+                        <!-- ДОБАВЛЕНА КНОПКА -->
+                        <button class="button button--primary product-card__button" onclick="addToCart('Интересная книга', 1499)">
+                            Добавить в корзину
+                        </button>
                     </article>
 
                     <article class="product-card">
@@ -62,6 +70,10 @@
                         <h3 class="product-card__name">Модные кроссовки</h3>
                         <p class="product-card__price">2 299 руб.</p>
                         <p class="experience-card__desc">Современная обувь для активного образа жизни.</p>
+                        <!-- ДОБАВЛЕНА КНОПКА -->
+                        <button class="button button--primary product-card__button" onclick="addToCart('Модные кроссовки', 2299)">
+                            Добавить в корзину
+                        </button>
                     </article>
                 </div>
             </section>
@@ -70,6 +82,14 @@
         <footer class="footer">
             <p class="footer__text">Футер</p>
         </footer>
+
+        <!-- Простой скрипт для демонстрации (без реальной функциональности) -->
+        <script>
+            function addToCart(productName, price) {
+                alert(`Товар "${productName}" добавлен в корзину!\nЦена: ${price} руб.`);
+                // В реальном приложении здесь была бы логика добавления в корзину
+            }
+        </script>
     </div>
 </body>
 </html>
