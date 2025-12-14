@@ -1,4 +1,3 @@
-<!-- Файл: pages/contacts.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,69 +5,233 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Контакты - Семестровая работа</title>
     <link rel="stylesheet" href="../styles/style.css">
+    <style>
+    /* Стили для модального окна (используем CSS переменные) */
+    dialog::backdrop {
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    dialog {
+        border: none;
+        border-radius: var(--border-radius-md);
+        padding: 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+        width: 90vw;
+        max-height: 90vh;
+        overflow-y: auto;
+        animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-50px) scale(0.9);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .modal-header {
+        background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-light) 100%);
+        color: var(--color-white);
+        padding: var(--spacing-lg);
+        border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+        margin: 0;
+    }
+
+    .modal-header h2 {
+        margin: 0;
+        color: var(--color-white);
+        font-size: var(--font-size-lg);
+    }
+
+    .modal-content {
+        padding: var(--spacing-xl);
+    }
+
+    .form-group {
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: var(--spacing-sm);
+        font-weight: 600;
+        color: var(--color-dark);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: var(--spacing-md);
+        border: 2px solid var(--color-light-dark);
+        border-radius: var(--border-radius-sm);
+        font-size: var(--font-size-base);
+        transition: border-color var(--transition-base);
+        box-sizing: border-box;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: var(--color-primary);
+    }
+
+    .form-group textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .modal-actions {
+        display: flex;
+        gap: var(--spacing-md);
+        justify-content: flex-end;
+        margin-top: var(--spacing-xl);
+    }
+
+    .required {
+        color: var(--color-danger);
+    }
+
+    @media (max-width: 600px) {
+        dialog {
+            margin: var(--spacing-md);
+            width: calc(100vw - 2rem);
+        }
+
+        .modal-actions {
+            flex-direction: column;
+        }
+
+        .modal-actions .button {
+            width: 100%;
+        }
+    }
+    </style>
 </head>
 <body>
     <div class="page-container">
         <header class="header">
-            <h1>Хэдер</h1>
+            <h1 class="header__title">Хэдер</h1>
         </header>
 
         <nav class="nav">
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <a class="nav-link" href="../index.html">Главная</a>
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a class="nav__link" href="../index.html">Главная</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="news.html">Новости</a>
+                <li class="nav__item">
+                    <a class="nav__link" href="news.html">Новости</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="practices.html">Практики</a>
+                <li class="nav__item">
+                    <a class="nav__link" href="practices.html">Практики</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="goods.html">Товары</a>
+                <li class="nav__item">
+                    <a class="nav__link" href="goods.html">Товары</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contacts.html">Контакты</a>
+                <li class="nav__item nav__item--active">
+                    <a class="nav__link" href="contacts.html">Контакты</a>
                 </li>
             </ul>
         </nav>
 
-        <main class="content">
-            <h1 class="profile-title">Контакты</h1>
+        <main class="main">
+            <h1 class="profile__title">Контакты</h1>
 
-            <section class="contacts-container">
-                <div class="contact-info">
-                    <h2 class="section-title">Свяжитесь с нами</h2>
+            <section class="contacts">
+                <h2 class="contacts__title">Свяжитесь с нами</h2>
 
-                    <p><strong>Электронная почта:</strong></p>
-                    <p><a href="mailto:mcdoni@gmail.com">mcdoni@gmail.com</a></p>
+                <div class="contacts__container">
+                    <div class="contact-info">
+                        <h3 class="contact-info__title">Контактная информация</h3>
 
-                    <p><strong>Адрес:</strong></p>
-                    <p>г. Москва, ул. Пушкина, д. Колотушкина, офис 123</p>
-                    <p>123456, Россия</p>
+                        <p><strong>Электронная почта:</strong></p>
+                        <p><a href="mailto:mcdoni@gmail.com">mcdoni@gmail.com</a></p>
 
-                    <p><strong>Телефон:</strong></p>
-                    <p>+7 (495) 123-45-67</p>
+                        <p><strong>Адрес:</strong></p>
+                        <p>г. Москва, ул. Пушкина, д. Колотушкина, офис 123</p>
+                        <p>123456, Россия</p>
+
+                        <p><strong>Телефон:</strong></p>
+                        <p>+7 (495) 123-45-67</p>
+                    </div>
+
+                    <!-- Кнопка для открытия модального окна -->
+                    <button class="button button--primary" onclick="document.getElementById('contactModal').showModal()">
+                        Связаться с нами
+                    </button>
+
+                    <p class="about__text"><em>Нажмите кнопку "Связаться с нами", чтобы открыть форму обратной связи</em></p>
                 </div>
-
-                <button class="contact-button" onclick="callMe()">Позвоните мне</button>
-
-                <p class="experience-desc"><em>Нажмите кнопку "Позвоните мне", и мы перезвоним вам в ближайшее время</em></p>
             </section>
         </main>
 
         <footer class="footer">
-            <p>Футер</p>
+            <p class="footer__text">Футер</p>
         </footer>
 
-        <script>
-            function callMe() {
-                let phone = prompt("Пожалуйста, введите ваш номер телефона:", "+7 (___) ___-____");
-                if (phone) {
-                    alert("Спасибо! Мы перезвоним вам на номер: " + phone + " в течение 15 минут.");
-                }
-            }
-        </script>
+        <!-- Модальное окно для формы обратной связи -->
+        <dialog id="contactModal">
+            <div class="modal-header">
+                <h2>Форма обратной связи</h2>
+            </div>
+
+            <div class="modal-content">
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label for="name">Имя <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required placeholder="Введите ваше имя">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Телефон <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+7 (XXX) XXX-XX-XX">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Электронная почта <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="example@mail.ru">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Категория обращения <span class="required">*</span></label>
+                        <select id="category" name="category" required>
+                            <option value="">Выберите категорию</option>
+                            <option value="technical">Техническая поддержка</option>
+                            <option value="commercial">Коммерческое предложение</option>
+                            <option value="cooperation">Сотрудничество</option>
+                            <option value="complaint">Жалоба</option>
+                            <option value="suggestion">Предложение</option>
+                            <option value="other">Другое</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Текст обращения <span class="required">*</span></label>
+                        <textarea id="message" name="message" required placeholder="Опишите вашу проблему или вопрос..."></textarea>
+                    </div>
+
+                    <div class="modal-actions">
+                        <!-- Кнопка закрытия окна -->
+                        <button type="button" class="button button--secondary"
+                                onclick="document.getElementById('contactModal').close()">
+                            Отмена
+                        </button>
+
+                        <!-- Кнопка "отправки" с простым сообщением -->
+                        <button type="button" class="button button--primary"
+                                onclick="alert('Спасибо! Ваше обращение отправлено. Мы свяжемся с вами в ближайшее время.'); document.getElementById('contactModal').close();">
+                            Отправить
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </dialog>
     </div>
 </body>
 </html>

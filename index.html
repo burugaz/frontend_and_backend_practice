@@ -3,46 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Семестровая работа</title>
+    <title>Главная - Семестровая работа</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
     <div class="page-container">
         <header class="header">
-            <h1>Хэдер</h1>
+            <h1 class="header__title">Хэдер</h1>
         </header>
 
         <nav class="nav">
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Главная</a>
+            <ul class="nav__list">
+                <li class="nav__item nav__item--active">
+                    <a class="nav__link" href="index.html">Главная</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="pages/news.html">Новости</a>
+                <li class="nav__item">
+                    <a class="nav__link" href="pages/news.html">Новости</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="pages/practices.html">Практики</a>
+                <li class="nav__item">
+                    <a class="nav__link" href="pages/practices.html">Практики</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="pages/goods.html">Товары</a>
+                <li class="nav__item">
+                    <a class="nav__link" href="pages/goods.html">Товары</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="pages/contacts.html">Контакты</a>
+                <li class="nav__item">
+                    <a class="nav__link" href="pages/contacts.html">Контакты</a>
                 </li>
             </ul>
         </nav>
 
-        <main class="content">
-            <article class="profile-header">
-                <h1 class="profile-title">Информация об авторе</h1>
-                <img class="profile-photo" src="images/pf.jpg" alt="Фото автора">
-                <h2 class="profile-name">Дементьев Андрей Александрович</h2>
-                <p class="profile-group">ЭФБО-16-24</p>
-            </article>
+        <main class="main">
+            <section class="profile">
+                <h1 class="profile__title">Информация об авторе</h1>
+                <img class="profile__photo" src="images/pf.jpg" alt="Фото автора">
+                <h2 class="profile__name">Дементьев Андрей Александрович</h2>
+                <p class="profile__group">ЭФБО-16-24</p>
+            </section>
 
-            <section class="about-me">
-                <h2>Обо мне</h2>
-                <p>
+            <section class="about">
+                <h2 class="about__title">Обо мне</h2>
+                <p class="about__text">
                     Родился в России-матушке, не думал, что перед
                     подъездом так много будет бабушек. Футбол, чипсы, книжки с картинками - такой в жизни пейзаж был лет до восьми.
                     Потом вуз, стоп какой вуз, не вуз, а котлета, появившаяся из черного туалета. Черного в жизни было много:
@@ -52,9 +52,9 @@
                 </p>
             </section>
 
-            <section class="skills-container">
-                <h2>Мои навыки</h2>
-                <div class="skills-grid">
+            <section class="skills">
+                <h2 class="skills__title">Мои навыки</h2>
+                <div class="skills__grid">
                     <div class="skill-tag">Умею чеканить 50 раз</div>
                     <div class="skill-tag">Люблю пиццу 4 сыра мазерати</div>
                     <div class="skill-tag">Вес растет только вверх</div>
@@ -62,26 +62,26 @@
                 </div>
             </section>
 
-            <section class="experience-section">
-                <h2 class="section-title">Мой опыт работы</h2>
-                <div class="experience-grid">
+            <section class="experience">
+                <h2 class="experience__title">Мой опыт работы</h2>
+                <div class="experience__grid">
                     <article class="experience-card">
-                        <h3 class="experience-title">Официант</h3>
-                        <p class="experience-desc">
+                        <h3 class="experience-card__title">Официант</h3>
+                        <p class="experience-card__desc">
                             Работал в ресторане. Разносил хинкали с хачапурями.
                         </p>
                     </article>
 
                     <article class="experience-card">
-                        <h3 class="experience-title">Футболист</h3>
-                        <p class="experience-desc">
+                        <h3 class="experience-card__title">Футболист</h3>
+                        <p class="experience-card__desc">
                             Бегал по траве туда-сюда. Мечтал, что будут платить миллионы
                         </p>
                     </article>
 
                     <article class="experience-card">
-                        <h3 class="experience-title">Профессиональный едок</h3>
-                        <p class="experience-desc">
+                        <h3 class="experience-card__title">Профессиональный едок</h3>
+                        <p class="experience-card__desc">
                             Ел много фаст-фуда. Прям много
                         </p>
                     </article>
@@ -90,7 +90,7 @@
         </main>
 
         <footer class="footer">
-            <p>Футер</p>
+            <p class="footer__text">Футер</p>
         </footer>
     </div>
 </body>

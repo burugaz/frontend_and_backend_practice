@@ -9,58 +9,66 @@
 <body>
     <div class="page-container">
         <header class="header">
-            <h1>Хэдер</h1>
+            <h1 class="header__title">Хэдер</h1>
         </header>
 
         <nav class="nav">
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <a class="nav-link" href="../index.html">Главная</a>
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a class="nav__link" href="../index.html">Главная</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="news.html">Новости</a>
+                <li class="nav__item">
+                    <a class="nav__link" href="news.html">Новости</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="practices.html">Практики</a>
+                <li class="nav__item">
+                    <a class="nav__link" href="practices.html">Практики</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="goods.html">Товары</a>
+                <li class="nav__item nav__item--active">
+                    <a class="nav__link" href="goods.html">Товары</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contacts.html">Контакты</a>
+                <li class="nav__item">
+                    <a class="nav__link" href="contacts.html">Контакты</a>
                 </li>
             </ul>
         </nav>
 
-        <main class="content">
-            <h1 class="profile-title">Каталог товаров</h1>
+        <main class="main">
+            <h1 class="profile__title">Каталог товаров</h1>
 
-            <section class="products-grid">
-                <article class="product-card">
-                    <img src="../images/umniy.webp" alt="Очки умного человека" class="product-image">
-                    <h3 class="product-name">Очки умного человека</h3>
-                    <p class="product-price">1 999 руб.</p>
-                    <p class="experience-desc">Стильные очки для настоящих интеллектуалов.</p>
-                </article>
+            <section class="products">
+                <h2 class="products__title">Наши товары</h2>
 
-                <article class="product-card">
-                    <img src="../images/funny_book.jpg" alt="Интересная книга" class="product-image">
-                    <h3 class="product-name">Интересная книга</h3>
-                    <p class="product-price">1 499 руб.</p>
-                    <p class="experience-desc">Увлекательная литература для расширения кругозора.</p>
-                </article>
+                <div class="products__grid">
+                    <!-- Товар с модификатором highlight -->
+                    <article class="product-card product-card--highlight">
+                        <img src="../images/umniy.webp" alt="Очки умного человека" class="product-card__image">
+                        <h3 class="product-card__name">Очки умного человека</h3>
+                        <p class="product-card__price">1 999 руб.</p>
+                        <p class="experience-card__desc">Стильные очки для настоящих интеллектуалов.</p>
+                    </article>
 
-                <article class="product-card">
-                    <img src="../images/Tralalelo tralala.jpg" alt="Модные кроссовки" class="product-image">
-                    <h3 class="product-name">Модные кроссовки</h3>
-                    <p class="product-price">2 299 руб.</p>
-                    <p class="experience-desc">Современная обувь для активного образа жизни.</p>
-                </article>
+                    <article class="product-card">
+                        <img src="../images/funny_book.jpg" alt="Интересная книга" class="product-card__image">
+                        <h3 class="product-card__name">Интересная книга</h3>
+                        <p class="product-card__price">
+                            <span class="product-card__old-price">1 999 руб.</span>
+                            1 499 руб.
+                        </p>
+                        <p class="experience-card__desc">Увлекательная литература для расширения кругозора.</p>
+                    </article>
+
+                    <article class="product-card">
+                        <img src="../images/Tralalelo tralala.jpg" alt="Модные кроссовки" class="product-card__image">
+                        <h3 class="product-card__name">Модные кроссовки</h3>
+                        <p class="product-card__price">2 299 руб.</p>
+                        <p class="experience-card__desc">Современная обувь для активного образа жизни.</p>
+                    </article>
+                </div>
             </section>
         </main>
 
         <footer class="footer">
-            <p>Футер</p>
+            <p class="footer__text">Футер</p>
         </footer>
     </div>
 </body>
