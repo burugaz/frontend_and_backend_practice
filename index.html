@@ -3,107 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная - Семестровая работа</title>
+    <title>Главная - Портфолио Дементьева А.А.</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Твой стиль (для переключателя темы) -->
     <link rel="stylesheet" href="styles/style.css">
+    <style>
+        /* Дополнительные стили для Bootstrap страницы */
+        .profile-img {
+            width: 200px;
+            height: 250px;
+            object-fit: cover;
+            border: 4px solid #667eea;
+        }
+
+        .skill-progress {
+            height: 10px;
+        }
+
+        .project-img {
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .experience-icon {
+            font-size: 2rem;
+            color: #667eea;
+        }
+
+        /* Белый фон для страницы */
+        body.bg-light {
+            background-color: #ffffff !important;
+        }
+
+        /* Специальные стили для темной темы */
+        .theme-dark body.bg-light {
+            background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-light) 100%) !important;
+        }
+
+        .theme-dark .container-fluid.p-0 {
+            background: var(--color-white);
+        }
+    </style>
 </head>
-<body>
-    <div class="page-container">
-        <header class="header">
-            <h1 class="header__title">Хэдер</h1>
-            <!-- Переключатель темы с эмодзи -->
-            <div class="theme-switch">
-                <input type="checkbox" id="theme-toggle" class="theme-switch__checkbox">
-                <label for="theme-toggle" class="theme-switch__label">
-                    <span class="theme-switch__emoji">☀️</span>
-                    <span class="theme-switch__slider">
-                        <span class="theme-switch__knob"></span>
-                    </span>
-                    <span class="theme-switch__emoji">🌙</span>
-                </label>
+<body class="bg-light bootstrap-page">
+    <div class="container-fluid p-0">
+        <!-- Header -->
+        <header class="bg-dark text-white py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h1 class="h3 mb-1">Портфолио</h1>
+                        <p class="mb-0 opacity-75">Дементьев Андрей Александрович</p>
+                    </div>
+                    <div class="col-auto">
+                        <!--<span class="badge bg-primary">ЭФБО-16-24</span>-->
+                        <!-- Переключатель темы -->
+                        <div class="theme-switch ms-3 d-inline-block">
+                            <input type="checkbox" id="theme-toggle" class="theme-switch__checkbox">
+                            <label for="theme-toggle" class="theme-switch__label">
+                                <span class="theme-switch__emoji">☀️</span>
+                                <span class="theme-switch__slider">
+                                    <span class="theme-switch__knob"></span>
+                                </span>
+                                <span class="theme-switch__emoji">🌙</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </header>
 
-        <nav class="nav">
-            <ul class="nav__list">
-                <li class="nav__item nav__item--active">
-                    <a class="nav__link" href="index.html">Главная</a>
-                </li>
-                <li class="nav__item">
-                    <a class="nav__link" href="pages/news.html">Новости</a>
-                </li>
-                <li class="nav__item">
-                    <a class="nav__link" href="pages/practices.html">Практики</a>
-                </li>
-                <li class="nav__item">
-                    <a class="nav__link" href="pages/goods.html">Товары</a>
-                </li>
-                <li class="nav__item">
-                    <a class="nav__link" href="pages/contacts.html">Контакты</a>
-                </li>
-            </ul>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav w-100 justify-content-between">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">
+                                <i class="bi bi-house me-1"></i>Главная
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/news.html">
+                                <i class="bi bi-newspaper me-1"></i>Новости
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/practices.html">
+                                <i class="bi bi-code-slash me-1"></i>Практики
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/goods.html">
+                                <i class="bi bi-cart me-1"></i>Товары
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/contacts.html">
+                                <i class="bi bi-telephone me-1"></i>Контакты
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
 
-        <main class="main">
-            <section class="profile">
-                <h1 class="profile__title">Информация об авторе</h1>
-                <img class="profile__photo" src="images/pf.jpg" alt="Фото автора">
-                <h2 class="profile__name">Дементьев Андрей Александрович</h2>
-                <p class="profile__group">ЭФБО-16-24</p>
-            </section>
-
-            <section class="about">
-                <h2 class="about__title">Обо мне</h2>
-                <p class="about__text">
-                    Родился в России-матушке, не думал, что перед
-                    подъездом так много будет бабушек. Футбол, чипсы, книжки с картинками - такой в жизни пейзаж был лет до восьми.
-                    Потом вуз, стоп какой вуз, не вуз, а котлета, появившаяся из черного туалета. Черного в жизни было много:
-                    очки, сандали с носками, рубашка в клетку, хорошо, что не попал я туда когда был малолеткой.
-                    В общем, вуз был чуть позже, лет в восемнадцать, только и делал, что по клавиатуре с утра до ночи клацал.
-                    В конце концов решил не брать подработку, в вузе выбрал я фуллстек разработку.
-                </p>
-            </section>
-
-            <section class="skills">
-                <h2 class="skills__title">Мои навыки</h2>
-                <div class="skills__grid">
-                    <div class="skill-tag">Умею чеканить 50 раз</div>
-                    <div class="skill-tag">Люблю пиццу 4 сыра мазерати</div>
-                    <div class="skill-tag">Вес растет только вверх</div>
-                    <div class="skill-tag">Знаю весь брейнорт</div>
+        <!-- Main Content -->
+        <main class="container my-4">
+            <!-- Profile Section -->
+            <section class="mb-5">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="row align-items-center">
+                            <div class="col-md-3 text-center mb-3 mb-md-0">
+                                <img src="images/pf.jpg" alt="Фото Дементьева А.А."
+                                     class="profile-img rounded-circle">
+                            </div>
+                            <div class="col-md-9">
+                                <h2 class="card-title h4 text-primary">Дементьев Андрей Александрович</h2>
+                                <p class="card-text text-muted mb-2">
+                                    <i class="bi bi-bookmark-check-fill text-primary"></i>
+                                    Студент группы ЭФБО-16-24
+                                </p>
+                                <p class="card-text">
+                                    Факультет информационных систем и технологий
+                                </p>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <span class="badge bg-primary">HTML/CSS</span>
+                                    <span class="badge bg-success">JavaScript</span>
+                                    <span class="badge bg-info">Bootstrap</span>
+                                    <span class="badge bg-warning">React</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <section class="experience">
-                <h2 class="experience__title">Мой опыт работы</h2>
-                <div class="experience__grid">
-                    <article class="experience-card">
-                        <h3 class="experience-card__title">Официант</h3>
-                        <p class="experience-card__desc">
-                            Работал в ресторане. Разносил хинкали с хачапурями.
+            <!-- About Section -->
+            <section class="mb-5">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-light">
+                        <h3 class="card-title h5 mb-0">
+                            <i class="bi bi-person-circle text-primary"></i>
+                            Обо мне
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            Родился в России-матушке, не думал, что перед подъездом так много будет бабушек.
+                            Футбол, чипсы, книжки с картинками - такой в жизни пейзаж был лет до восьми.
                         </p>
-                    </article>
+                        <p class="card-text">
+                            Потом вуз, стоп какой вуз, не вуз, а котлета, появившаяся из черного туалета.
+                            Черного в жизни было много: очки, сандали с носками, рубашка в клетку,
+                            хорошо, что не попал я туда когда был малолеткой.
+                        </p>
+                        <p class="card-text">
+                            В общем, вуз был чуть позже, лет в восемнадцать, только и делал,
+                            что по клавиатуре с утра до ночи клацал. В конце концов решил не брать подработку,
+                            в вузе выбрал я фуллстек разработку.
+                        </p>
+                    </div>
+                </div>
+            </section>
 
-                    <article class="experience-card">
-                        <h3 class="experience-card__title">Футболист</h3>
-                        <p class="experience-card__desc">
-                            Бегал по траве туда-сюда. Мечтал, что будут платить миллионы
-                        </p>
-                    </article>
+            <!-- Skills Section -->
+            <section class="mb-5">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-light">
+                        <h3 class="card-title h5 mb-0">
+                            <i class="bi bi-tools text-primary"></i>
+                            Мои навыки
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>Использование нейросетей</span>
+                                        <span class="text-primary">0%</span>
+                                    </div>
+                                    <div class="progress skill-progress">
+                                        <div class="progress-bar bg-primary" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>2025 год</span>
+                                        <span class="text-primary">96%</span>
+                                    </div>
+                                    <div class="progress skill-progress">
+                                        <div class="progress-bar bg-success" style="width: 96%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>HTML/CSS/JS</span>
+                                        <span class="text-primary">50%</span>
+                                    </div>
+                                    <div class="progress skill-progress">
+                                        <div class="progress-bar bg-info" style="width: 50%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>Знание брейнрота</span>
+                                        <span class="text-primary">99%</span>
+                                    </div>
+                                    <div class="progress skill-progress">
+                                        <div class="progress-bar bg-warning" style="width: 99%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                    <article class="experience-card">
-                        <h3 class="experience-card__title">Профессиональный едок</h3>
-                        <p class="experience-card__desc">
-                            Ел много фаст-фуда. Прям много
-                        </p>
-                    </article>
+            <!-- Experience Section -->
+            <section class="mb-5">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-light">
+                        <h3 class="card-title h5 mb-0">
+                            <i class="bi bi-briefcase text-primary"></i>
+                            Мой опыт работы
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="card h-100 text-center">
+                                    <div class="card-body">
+                                        <div class="experience-icon mb-3">
+                                            <i class="bi bi-cup"></i>
+                                        </div>
+                                        <h5 class="card-title">Официант</h5>
+                                        <p class="card-text small text-muted">
+                                            Работал в ресторане. Разносил хинкали с хачапурями.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card h-100 text-center">
+                                    <div class="card-body">
+                                        <div class="experience-icon mb-3">
+                                            <i class="bi bi-trophy"></i>
+                                        </div>
+                                        <h5 class="card-title">Футболист</h5>
+                                        <p class="card-text small text-muted">
+                                            Бегал по траве туда-сюда. Мечтал, что будут платить миллионы.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card h-100 text-center">
+                                    <div class="card-body">
+                                        <div class="experience-icon mb-3">
+                                            <i class="bi bi-egg-fried"></i>
+                                        </div>
+                                        <h5 class="card-title">Профессиональный едок</h5>
+                                        <p class="card-text small text-muted">
+                                            Ел много фаст-фуда. Прям много.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
 
-        <footer class="footer">
-            <p class="footer__text">Футер</p>
+        <!-- Footer -->
+        <footer class="bg-dark text-white py-4 mt-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="mb-0">&copy; 2024 Портфолио студента. Все права защищены.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <a href="pages/contacts.html" class="text-white text-decoration-none me-3">Контакты</a>
+                        <a href="#" class="text-white text-decoration-none">Политика конфиденциальности</a>
+                    </div>
+                </div>
+            </div>
         </footer>
     </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Твой скрипт для темы -->
     <script src="js/theme.js"></script>
 </body>
 </html>

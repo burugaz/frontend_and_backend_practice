@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Товары - Семестровая работа</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <div class="page-container">
+        <header class="header">
+            <h1 class="header__title">Хэдер</h1>
+        </header>
+
+        <nav class="nav">
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a class="nav__link" href="../index.html">Главная</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="news.html">Новости</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="practices.html">Практики</a>
+                </li>
+                <li class="nav__item nav__item--active">
+                    <a class="nav__link" href="goods.html">Товары</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="contacts.html">Контакты</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="main">
+            <h1 class="profile__title">Каталог товаров</h1>
+
+            <section class="products">
+                <h2 class="products__title">Наши товары</h2>
+
+                <div class="products__grid">
+                    <!-- Товар с модификатором highlight -->
+                    <article class="product-card product-card--highlight">
+                        <img src="../images/umniy.webp" alt="Очки умного человека" class="product-card__image">
+                        <h3 class="product-card__name">Очки умного человека</h3>
+                        <p class="product-card__price">1 999 руб.</p>
+                        <p class="experience-card__desc">Стильные очки для настоящих интеллектуалов.</p>
+                        <!-- ДОБАВЛЕНА КНОПКА -->
+                        <button class="button button--primary product-card__button" onclick="addToCart('Очки умного человека', 1999)">
+                            Добавить в корзину
+                        </button>
+                    </article>
+
+                    <article class="product-card">
+                        <img src="../images/funny_book.jpg" alt="Интересная книга" class="product-card__image">
+                        <h3 class="product-card__name">Интересная книга</h3>
+                        <p class="product-card__price">
+                            <span class="product-card__old-price">1 999 руб.</span>
+                            1 499 руб.
+                        </p>
+                        <p class="experience-card__desc">Увлекательная литература для расширения кругозора.</p>
+                        <!-- ДОБАВЛЕНА КНОПКА -->
+                        <button class="button button--primary product-card__button" onclick="addToCart('Интересная книга', 1499)">
+                            Добавить в корзину
+                        </button>
+                    </article>
+
+                    <article class="product-card">
+                        <img src="../images/Tralalelo tralala.jpg" alt="Модные кроссовки" class="product-card__image">
+                        <h3 class="product-card__name">Модные кроссовки</h3>
+                        <p class="product-card__price">2 299 руб.</p>
+                        <p class="experience-card__desc">Современная обувь для активного образа жизни.</p>
+                        <!-- ДОБАВЛЕНА КНОПКА -->
+                        <button class="button button--primary product-card__button" onclick="addToCart('Модные кроссовки', 2299)">
+                            Добавить в корзину
+                        </button>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p class="footer__text">Футер</p>
+        </footer>
+
+        <!-- Простой скрипт для демонстрации (без реальной функциональности) -->
+        <script>
+            function addToCart(productName, price) {
+                alert(`Товар "${productName}" добавлен в корзину!\nЦена: ${price} руб.`);
+                // В реальном приложении здесь была бы логика добавления в корзину
+            }
+        </script>
+    </div>
+    <script src="../js/theme.js"></script>
+</body>
+</html>

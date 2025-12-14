@@ -711,7 +711,7 @@ body {
 /* ===== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ С ЭМОДЗИ ===== */
 .theme-switch {
     position: absolute;
-    top: 20px;
+    top: 30px;
     right: 150px;
     z-index: 100;
 }
@@ -877,4 +877,32 @@ body {
 @keyframes emojiBounce {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.2); }
+}
+
+/* ===== СПЕЦИАЛЬНЫЕ СТИЛИ ДЛЯ BOOTSTRAP СТРАНИЦ ===== */
+
+/* Белый фон для Bootstrap страниц в светлой теме */
+:not(.theme-dark) body.bg-light {
+    background: #ffffff !important;
+}
+
+/* Контейнер для Bootstrap страниц */
+.container-fluid.p-0 {
+    background: #ffffff;
+}
+
+/* Для темной темы оставляем как есть */
+.theme-dark body.bg-light {
+    background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-light) 100%) !important;
+}
+
+.theme-dark .container-fluid.p-0 {
+    background: var(--color-white);
+}
+
+.theme-switch body.bg{
+    position: absolute;
+    top: 30px;
+    right: 60px;
+    z-index: 100;
 }

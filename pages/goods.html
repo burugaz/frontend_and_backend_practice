@@ -3,94 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Товары - Семестровая работа</title>
+    <title>Товары - Bootstrap версия</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../styles/style.css">
+    <style>
+        .product-img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .highlight-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1;
+        }
+    </style>
 </head>
-<body>
-    <div class="page-container">
-        <header class="header">
-            <h1 class="header__title">Хэдер</h1>
+<body class="bg-light">
+    <div class="container-fluid p-0">
+        <!-- Header -->
+        <header class="bg-dark text-white py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h1 class="h3 mb-1">Каталог товаров</h1>
+                        <p class="mb-0 opacity-75">Лучшие товары по лучшим ценам</p>
+                    </div>
+                    <div class="col-auto">
+                        <!-- Переключатель темы -->
+                        <div class="theme-switch">
+                            <input type="checkbox" id="theme-toggle" class="theme-switch__checkbox">
+                            <label for="theme-toggle" class="theme-switch__label">
+                                <span class="theme-switch__emoji">☀️</span>
+                                <span class="theme-switch__slider">
+                                    <span class="theme-switch__knob"></span>
+                                </span>
+                                <span class="theme-switch__emoji">🌙</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </header>
 
-        <nav class="nav">
-            <ul class="nav__list">
-                <li class="nav__item">
-                    <a class="nav__link" href="../index.html">Главная</a>
-                </li>
-                <li class="nav__item">
-                    <a class="nav__link" href="news.html">Новости</a>
-                </li>
-                <li class="nav__item">
-                    <a class="nav__link" href="practices.html">Практики</a>
-                </li>
-                <li class="nav__item nav__item--active">
-                    <a class="nav__link" href="goods.html">Товары</a>
-                </li>
-                <li class="nav__item">
-                    <a class="nav__link" href="contacts.html">Контакты</a>
-                </li>
-            </ul>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav w-100 justify-content-between">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">
+                                <i class="bi bi-house me-1"></i>Главная
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="news.html">
+                                <i class="bi bi-newspaper me-1"></i>Новости
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="practices.html">
+                                <i class="bi bi-code-slash me-1"></i>Практики
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="goods.html">
+                                <i class="bi bi-cart me-1"></i>Товары
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contacts.html">
+                                <i class="bi bi-telephone me-1"></i>Контакты
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
 
-        <main class="main">
-            <h1 class="profile__title">Каталог товаров</h1>
-
-            <section class="products">
-                <h2 class="products__title">Наши товары</h2>
-
-                <div class="products__grid">
-                    <!-- Товар с модификатором highlight -->
-                    <article class="product-card product-card--highlight">
-                        <img src="../images/umniy.webp" alt="Очки умного человека" class="product-card__image">
-                        <h3 class="product-card__name">Очки умного человека</h3>
-                        <p class="product-card__price">1 999 руб.</p>
-                        <p class="experience-card__desc">Стильные очки для настоящих интеллектуалов.</p>
-                        <!-- ДОБАВЛЕНА КНОПКА -->
-                        <button class="button button--primary product-card__button" onclick="addToCart('Очки умного человека', 1999)">
-                            Добавить в корзину
-                        </button>
-                    </article>
-
-                    <article class="product-card">
-                        <img src="../images/funny_book.jpg" alt="Интересная книга" class="product-card__image">
-                        <h3 class="product-card__name">Интересная книга</h3>
-                        <p class="product-card__price">
-                            <span class="product-card__old-price">1 999 руб.</span>
-                            1 499 руб.
-                        </p>
-                        <p class="experience-card__desc">Увлекательная литература для расширения кругозора.</p>
-                        <!-- ДОБАВЛЕНА КНОПКА -->
-                        <button class="button button--primary product-card__button" onclick="addToCart('Интересная книга', 1499)">
-                            Добавить в корзину
-                        </button>
-                    </article>
-
-                    <article class="product-card">
-                        <img src="../images/Tralalelo tralala.jpg" alt="Модные кроссовки" class="product-card__image">
-                        <h3 class="product-card__name">Модные кроссовки</h3>
-                        <p class="product-card__price">2 299 руб.</p>
-                        <p class="experience-card__desc">Современная обувь для активного образа жизни.</p>
-                        <!-- ДОБАВЛЕНА КНОПКА -->
-                        <button class="button button--primary product-card__button" onclick="addToCart('Модные кроссовки', 2299)">
-                            Добавить в корзину
-                        </button>
-                    </article>
+        <!-- Main Content -->
+        <main class="container my-5">
+            <div class="row mb-4">
+                <div class="col">
+                    <h2 class="text-center text-primary">Наши товары</h2>
+                    <p class="text-center text-muted">Выберите товары, которые вам нравятся</p>
                 </div>
-            </section>
+            </div>
+
+            <div class="row g-4">
+                <!-- Товар 1 (Хит продаж) -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 shadow-sm position-relative">
+                        <span class="badge bg-danger highlight-badge">🔥 Хит</span>
+                        <img src="../images/umniy.webp" class="card-img-top product-img" alt="Очки умного человека">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Очки умного человека</h5>
+                            <p class="card-text flex-grow-1">Стильные очки для настоящих интеллектуалов. Повышают IQ на 50 пунктов!</p>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4 class="text-danger mb-0">1 999 руб.</h4>
+                                    <span class="badge bg-success">В наличии</span>
+                                </div>
+                                <button class="btn btn-primary w-100" onclick="addToCart('Очки умного человека', 1999)">
+                                    <i class="bi bi-cart-plus me-2"></i>Добавить в корзину
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 2 (Со скидкой) -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <img src="../images/funny_book.jpg" class="card-img-top product-img" alt="Интересная книга">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Интересная книга</h5>
+                            <p class="card-text flex-grow-1">Увлекательная литература для расширения кругозора. Бестселлер 2024 года!</p>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        <h4 class="text-danger mb-0">1 499 руб.</h4>
+                                        <small class="text-muted text-decoration-line-through">1 999 руб.</small>
+                                        <span class="badge bg-warning ms-2">-25%</span>
+                                    </div>
+                                    <span class="badge bg-success">В наличии</span>
+                                </div>
+                                <button class="btn btn-primary w-100" onclick="addToCart('Интересная книга', 1499)">
+                                    <i class="bi bi-cart-plus me-2"></i>Добавить в корзину
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <img src="../images/Tralalelo tralala.jpg" class="card-img-top product-img" alt="Модные кроссовки">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Модные кроссовки</h5>
+                            <p class="card-text flex-grow-1">Современная обувь для активного образа жизни. Удобно, стильно, технологично!</p>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4 class="text-danger mb-0">2 299 руб.</h4>
+                                    <span class="badge bg-warning">Мало</span>
+                                </div>
+                                <button class="btn btn-primary w-100" onclick="addToCart('Модные кроссовки', 2299)">
+                                    <i class="bi bi-cart-plus me-2"></i>Добавить в корзину
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Дополнительная информация -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-info-circle text-primary me-2"></i>Информация о доставке</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">🚚 Бесплатная доставка при заказе от 3000 руб.</li>
+                                <li class="list-group-item">⏱️ Доставка по Москве 1-2 дня</li>
+                                <li class="list-group-item">💰 Оплата при получении или онлайн</li>
+                                <li class="list-group-item">🔄 Возврат в течение 14 дней</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
 
-        <footer class="footer">
-            <p class="footer__text">Футер</p>
+        <!-- Footer -->
+        <footer class="bg-dark text-white py-4 mt-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="mb-0">&copy; 2024 Интернет-магазин. Все права защищены.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <a href="contacts.html" class="text-white text-decoration-none me-3">Контакты</a>
+                        <a href="#" class="text-white text-decoration-none">Условия доставки</a>
+                    </div>
+                </div>
+            </div>
         </footer>
-
-        <!-- Простой скрипт для демонстрации (без реальной функциональности) -->
-        <script>
-            function addToCart(productName, price) {
-                alert(`Товар "${productName}" добавлен в корзину!\nЦена: ${price} руб.`);
-                // В реальном приложении здесь была бы логика добавления в корзину
-            }
-        </script>
     </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Твой скрипт темы -->
     <script src="../js/theme.js"></script>
+    <!-- Скрипт для корзины -->
+    <script>
+        function addToCart(productName, price) {
+            alert(`Товар "${productName}" добавлен в корзину!\nЦена: ${price} руб.`);
+            // В реальном приложении здесь была бы логика добавления в корзину
+        }
+    </script>
 </body>
 </html>
