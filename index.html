@@ -10,6 +10,17 @@
     <div class="page-container">
         <header class="header">
             <h1 class="header__title">Хэдер</h1>
+            <!-- Переключатель темы с эмодзи -->
+            <div class="theme-switch">
+                <input type="checkbox" id="theme-toggle" class="theme-switch__checkbox">
+                <label for="theme-toggle" class="theme-switch__label">
+                    <span class="theme-switch__emoji">☀️</span>
+                    <span class="theme-switch__slider">
+                        <span class="theme-switch__knob"></span>
+                    </span>
+                    <span class="theme-switch__emoji">🌙</span>
+                </label>
+            </div>
         </header>
 
         <nav class="nav">
@@ -93,5 +104,6 @@
             <p class="footer__text">Футер</p>
         </footer>
     </div>
+    <script src="js/theme.js"></script>
 </body>
 </html>

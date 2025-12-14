@@ -576,7 +576,7 @@ body {
 }
 
 /* ===== ТЕМНАЯ ТЕМА ===== */
-[data-theme="dark"] {
+.theme-dark {
     --color-dark: #1a1a2e;
     --color-dark-light: #16213e;
     --color-light: #2d3748;
@@ -584,24 +584,297 @@ body {
     --color-text: #e2e8f0;
     --color-text-light: #a0aec0;
     --color-white: #1a202c;
-    --color-primary: #553c9a;
+    --color-primary: #9f7aea;
     --color-secondary: #805ad5;
+    --color-accent: #9f7aea;
+    --color-accent-light: #d6bcfa;
+    --color-danger: #fc8181;
+    --color-success: #68d391;
 
+    /* Фон страницы */
     body {
         background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-light) 100%);
     }
 
+    /* Основной контейнер */
     .page-container {
         background: var(--color-white);
         box-shadow: 0 0 30px rgba(0,0,0,0.3);
     }
 
+    /* Текст в header и footer */
+    .header__title,
+    .footer__text {
+        color: var(--color-text) !important;
+    }
+
+    /* Навигация */
+    .nav {
+        background: var(--color-dark-light);
+    }
+
+    .nav__link {
+        color: var(--color-text-light);
+    }
+
+    .nav__item--active .nav__link {
+        background: var(--color-primary);
+        color: var(--color-white);
+    }
+
+    /* Основной контент */
+    .profile__title,
+    .profile__name,
+    .profile__group,
+    .about__title,
+    .skills__title,
+    .experience__title,
+    .products__title,
+    .contacts__title,
+    .news__title {
+        color: var(--color-text) !important;
+    }
+
+    .about__text,
+    .experience-card__desc,
+    .news-card__text,
+    .news-card__meta,
+    .contact-info,
+    .contact-info__title {
+        color: var(--color-text-light) !important;
+    }
+
+    /* Карточки */
     .experience-card,
     .news-card,
     .product-card,
     .contact-info,
     .about {
         background: var(--color-light);
+        border-color: var(--color-light-dark);
+    }
+
+    .experience-card__title,
+    .news-card__title,
+    .product-card__name {
         color: var(--color-text);
     }
+
+    .product-card__price {
+        color: var(--color-danger);
+    }
+
+    .skill-tag {
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+        color: var(--color-white);
+    }
+
+    /* Ссылки */
+    a {
+        color: var(--color-accent);
+    }
+
+    a:hover {
+        color: var(--color-accent-light);
+    }
+
+    /* Кнопки */
+    .button--primary {
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    }
+
+    .button--secondary {
+        background: var(--color-light);
+        color: var(--color-text);
+        border-color: var(--color-light-dark);
+    }
+
+    /* Для модального окна в contacts.html */
+    .form-group label {
+        color: var(--color-text);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        background: var(--color-light-dark);
+        border-color: var(--color-dark-light);
+        color: var(--color-text);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: var(--color-text-light);
+    }
+}
+
+/* ===== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ С ЭМОДЗИ ===== */
+.theme-switch {
+    position: absolute;
+    top: 20px;
+    right: 150px;
+    z-index: 100;
+}
+
+.theme-switch__checkbox {
+    display: none;
+}
+
+.theme-switch__label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: background var(--transition-base);
+}
+
+.theme-switch__label:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.theme-switch__emoji {
+    font-size: 1.2rem;
+    transition: opacity var(--transition-base);
+    user-select: none;
+    min-width: 24px;
+    text-align: center;
+}
+
+/* Для светлой темы: солнце яркое, луна тусклая */
+:not(.theme-dark) .theme-switch__emoji:first-child {
+    opacity: 1;
+}
+:not(.theme-dark) .theme-switch__emoji:last-child {
+    opacity: 0.5;
+}
+
+/* Для темной темы: солнце тусклое, луна яркая */
+.theme-dark .theme-switch__emoji:first-child {
+    opacity: 0.5;
+}
+.theme-dark .theme-switch__emoji:last-child {
+    opacity: 1;
+}
+
+.theme-switch__slider {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    background: linear-gradient(to right, #ffd700, #ffaa00);
+    border-radius: 34px;
+    transition: all var(--transition-base);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.theme-dark .theme-switch__slider {
+    background: linear-gradient(to right, #4a5568, #2d3748);
+}
+
+.theme-switch__knob {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 2px;
+    top: 2px;
+    background: white;
+    border-radius: 50%;
+    transition: transform var(--transition-base);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Иконки на кнопке */
+.theme-switch__knob::before {
+    content: "☀️";
+    font-size: 0.7rem;
+    position: absolute;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.theme-switch__knob::after {
+    content: "🌙";
+    font-size: 0.7rem;
+    position: absolute;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+:not(.theme-dark) .theme-switch__knob::before {
+    opacity: 1;
+}
+
+.theme-dark .theme-switch__knob::after {
+    opacity: 1;
+}
+
+/* Перемещение кнопки при переключении */
+.theme-switch__checkbox:checked + .theme-switch__label .theme-switch__knob {
+    transform: translateX(26px);
+}
+
+/* Анимация переключения */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.theme-switch__checkbox:checked + .theme-switch__label .theme-switch__emoji:first-child,
+.theme-switch__checkbox:not(:checked) + .theme-switch__label .theme-switch__emoji:last-child {
+    animation: pulse 0.3s ease;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .theme-switch {
+        top: 15px;
+        right: 15px;
+    }
+
+    .theme-switch__label {
+        gap: 8px;
+        padding: 4px;
+    }
+
+    .theme-switch__slider {
+        width: 45px;
+        height: 22px;
+    }
+
+    .theme-switch__knob {
+        width: 18px;
+        height: 18px;
+    }
+
+    .theme-switch__checkbox:checked + .theme-switch__label .theme-switch__knob {
+        transform: translateX(23px);
+    }
+}
+
+/* Анимация переключения */
+.theme-switching .theme-switch__slider {
+    animation: slideSwitch 0.3s ease;
+}
+
+@keyframes slideSwitch {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.theme-switching .theme-switch__emoji {
+    animation: emojiBounce 0.3s ease;
+}
+
+@keyframes emojiBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
 }
