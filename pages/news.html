@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -8,9 +8,11 @@
 </head>
 <body>
     <div class="page-container">
-        <div class="header">Хэдер</div>
+        <header class="header">
+            <h1>Хэдер</h1>
+        </header>
 
-        <div class="nav">
+        <nav class="nav">
             <ul class="nav-list">
                 <li class="nav-item">
                     <a class="nav-link" href="../index.html">Главная</a>
@@ -28,42 +30,41 @@
                     <a class="nav-link" href="contacts.html">Контакты</a>
                 </li>
             </ul>
-        </div>
+        </nav>
 
-        <div class="content">
-            <h1>Новости</h1>
+        <main class="content">
+            <h1 class="profile-title">Новости</h1>
 
-            <div class="news-item">
-                <h2 class="section-title">Проблемы великого клуба</h2>
-                <div class="experience-card">
-                <p><small>Дата публикации: 10.12.2025 | Автор:  Дементьев А.А.</small></p>
-                <p>Реал Мадрид проиграл с позором, получив 2 удаления. Сможет ли клуб одолеть 2 салата оливье
-                    на новый год, вернуться с новыми силами и взять чемпионство?</p>
-                <p>Эксперты считают что винить стоит тренера</p>
-                </div>
-            </div>
+            <section class="news-container">
+                <article class="news-card">
+                    <h2 class="news-title">Проблемы великого клуба</h2>
+                    <p class="news-meta">Дата публикации: 10.12.2025 | Автор: Дементьев А.А.</p>
+                    <p class="news-text">Реал Мадрид проиграл с позором, получив 2 удаления. Сможет ли клуб одолеть 2 салата оливье
+                        на новый год, вернуться с новыми силами и взять чемпионство?</p>
+                    <p class="news-text">Эксперты считают что винить стоит тренера</p>
+                </article>
 
-            <div class="news-item">
-                <h2 class="section-title">Старую бабушку обманули на деньги</h2>
-                <div class="experience-card">
-                    <p><small>Дата публикации: 05.12.2025 | Автор: Петров П.П.</small></p>
-                    <p>Бабушку из Москвы, которая увлекается пением, мошенники заставили
+                <article class="news-card">
+                    <h2 class="news-title">Старую бабушку обманули на деньги</h2>
+                    <p class="news-meta">Дата публикации: 05.12.2025 | Автор: Петров П.П.</p>
+                    <p class="news-text">Бабушку из Москвы, которая увлекается пением, мошенники заставили
                         обманом перевести деньги и даже продать квартиру,
-                        сможет ли она вернуть своё?
-                    </p></div>
-                </div>
-            <div class="news-item">
-                <h2 class="section-title">Заголовок третьей новости</h2>
-                <div class="experience-card">
-                    <p><small>Дата публикации: 01.12.2025 | Автор: Сидоров С.С.</small></p>
-                    <p>Текст третьей новости. Минимум три новости на странице, как требуется в задании.
-                    Это может быть анонс мероприятий, обновлений или других важных событий.</p>
-                    <p>Подробности и детали, которые помогут читателям лучше понять суть новости.</p>
-                </div>
-            </div>
-        </div>
+                        сможет ли она вернуть своё?</p>
+                </article>
 
-        <div class="footer">Футер</div>
+                <article class="news-card">
+                    <h2 class="news-title">Заголовок третьей новости</h2>
+                    <p class="news-meta">Дата публикации: 01.12.2025 | Автор: Сидоров С.С.</p>
+                    <p class="news-text">Текст третьей новости. Минимум три новости на странице, как требуется в задании.
+                        Это может быть анонс мероприятий, обновлений или других важных событий.</p>
+                    <p class="news-text">Подробности и детали, которые помогут читателям лучше понять суть новости.</p>
+                </article>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>Футер</p>
+        </footer>
     </div>
 </body>
 </html>

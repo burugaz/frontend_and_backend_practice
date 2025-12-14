@@ -1,4 +1,4 @@
- /* ===== БАЗОВЫЕ СТИЛИ ===== */
+/* ===== БАЗОВЫЕ СТИЛИ ===== */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -14,6 +14,14 @@ body {
     background: white;
     min-height: 100vh;
     box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    /* НОВОЕ: CSS Grid для основного макета */
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+        "header"
+        "nav"
+        "main"
+        "footer";
 }
 
 /* ===== ШАПКА ===== */
@@ -25,12 +33,16 @@ body {
     font-size: 28px;
     font-weight: 300;
     letter-spacing: 2px;
+    /* НОВОЕ: Привязка к области сетки */
+    grid-area: header;
 }
 
 /* ===== НАВИГАЦИЯ ===== */
 .nav {
     background: #2c3e50;
     padding: 20px 0;
+    /* НОВОЕ: Привязка к области сетки */
+    grid-area: nav;
 }
 
 .nav-list {
@@ -61,10 +73,12 @@ body {
 }
 
 /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
-.content {
+main.content {
     padding: 40px;
     max-width: 900px;
     margin: 0 auto;
+    /* НОВОЕ: Привязка к области сетки */
+    grid-area: main;
 }
 
 /* ===== ГЛАВНАЯ СТРАНИЦА ===== */
@@ -114,12 +128,12 @@ body {
 }
 
 /* ===== НАВЫКИ ===== */
-.skills-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+/* НОВОЕ: CSS Grid для навыков */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px;
-    margin: 30px 0;
+    margin: 20px 0;
 }
 
 .skill-tag {
@@ -131,6 +145,7 @@ body {
     font-size: 14px;
     box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
     transition: all 0.3s ease;
+    text-align: center;
 }
 
 .skill-tag:hover {
@@ -151,10 +166,16 @@ body {
     font-weight: 300;
 }
 
+/*CSS Grid для карточек опыта */
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
 .experience-card {
     background: white;
     padding: 25px;
-    margin: 20px 0;
     border-radius: 12px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     border-left: 4px solid #667eea;
@@ -178,11 +199,54 @@ body {
     margin: 0;
 }
 
+/* ===== КАТАЛОГ ТОВАРОВ ===== */
+.product-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    border: 1px solid #eaeaea;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+.product-card h3 {
+    color: #2c3e50;
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+.product-card p {
+    color: #7f8c8d;
+    margin: 8px 0;
+}
+
+.product-card strong {
+    color: #667eea;
+    font-size: 18px;
+}
+
 /* ===== ФУТЕР ===== */
 .footer {
     background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
     color: white;
     text-align: center;
     padding: 30px;
-    margin-top: 50px;
+    /* НОВОЕ: Привязка к области сетки и удален margin-top */
+    grid-area: footer;
 }

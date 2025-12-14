@@ -8,9 +8,11 @@
 </head>
 <body>
     <div class="page-container">
-        <div class="header">Хэдер</div>
+        <header class="header">
+            <h1>Хэдер</h1>
+        </header>
 
-        <div class="nav">
+        <nav class="nav">
             <ul class="nav-list">
                 <li class="nav-item">
                     <a class="nav-link" href="index.html">Главная</a>
@@ -28,17 +30,18 @@
                     <a class="nav-link" href="pages/contacts.html">Контакты</a>
                 </li>
             </ul>
-        </div>
+        </nav>
 
-        <div class="content">
-            <div class="profile-header">
+        <main class="content">
+            <article class="profile-header">
                 <h1 class="profile-title">Информация об авторе</h1>
                 <img class="profile-photo" src="images/pf.jpg" alt="Фото автора">
                 <h2 class="profile-name">Дементьев Андрей Александрович</h2>
                 <p class="profile-group">ЭФБО-16-24</p>
-            </div>
+            </article>
 
-            <div class="about-me">
+            <section class="about-me">
+                <h2>Обо мне</h2>
                 <p>
                     Родился в России-матушке, не думал, что перед
                     подъездом так много будет бабушек. Футбол, чипсы, книжки с картинками - такой в жизни пейзаж был лет до восьми.
@@ -46,44 +49,49 @@
                     очки, сандали с носками, рубашка в клетку, хорошо, что не попал я туда когда был малолеткой.
                     В общем, вуз был чуть позже, лет в восемнадцать, только и делал, что по клавиатуре с утра до ночи клацал.
                     В конце концов решил не брать подработку, в вузе выбрал я фуллстек разработку.
-
                 </p>
-            </div>
+            </section>
 
-            <div class="skills-container">
-                <div class="skill-tag">Умею чеканить 50 раз</div>
-                <div class="skill-tag">Люблю пиццу 4 сыра мазерати</div>
-                <div class="skill-tag">Вес растет только вверх</div>
-                <div class="skill-tag">Знаю весь брейнорт</div>
-            </div>
+            <section class="skills-container">
+                <h2>Мои навыки</h2>
+                <div class="skills-grid">
+                    <div class="skill-tag">Умею чеканить 50 раз</div>
+                    <div class="skill-tag">Люблю пиццу 4 сыра мазерати</div>
+                    <div class="skill-tag">Вес растет только вверх</div>
+                    <div class="skill-tag">Знаю весь брейнорт</div>
+                </div>
+            </section>
 
-            <div class="experience-section">
+            <section class="experience-section">
                 <h2 class="section-title">Мой опыт работы</h2>
+                <div class="experience-grid">
+                    <article class="experience-card">
+                        <h3 class="experience-title">Официант</h3>
+                        <p class="experience-desc">
+                            Работал в ресторане. Разносил хинкали с хачапурями.
+                        </p>
+                    </article>
 
-                <div class="experience-card">
-                    <h3 class="experience-title">Официант</h3>
-                    <p class="experience-desc">
-                        Работал в ресторане. Разносил хинкали с хачапурями.
-                    </p>
+                    <article class="experience-card">
+                        <h3 class="experience-title">Футболист</h3>
+                        <p class="experience-desc">
+                            Бегал по траве туда-сюда. Мечтал, что будут платить миллионы
+                        </p>
+                    </article>
+
+                    <article class="experience-card">
+                        <h3 class="experience-title">Профессиональный едок</h3>
+                        <p class="experience-desc">
+                            Ел много фаст-фуда. Прям много
+                        </p>
+                    </article>
                 </div>
+            </section>
+        </main>
 
-                <div class="experience-card">
-                    <h3 class="experience-title">Футболист</h3>
-                    <p class="experience-desc">
-                        Бегал по траве туда-сюда. Мечтал, что будут платить миллионы
-                    </p>
-                </div>
-
-                <div class="experience-card">
-                    <h3 class="experience-title">Профессиональный едок</h3>
-                    <p class="experience-desc">
-                        Ел много фаст-фуда. Прям много
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer">Футер</div>
+        <footer class="footer">
+            <p>Футер</p>
+        </footer>
     </div>
 </body>
 </html>

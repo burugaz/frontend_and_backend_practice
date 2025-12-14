@@ -8,9 +8,11 @@
 </head>
 <body>
     <div class="page-container">
-        <div class="header">Хэдер</div>
+        <header class="header">
+            <h1>Хэдер</h1>
+        </header>
 
-        <div class="nav">
+        <nav class="nav">
             <ul class="nav-list">
                 <li class="nav-item">
                     <a class="nav-link" href="../index.html">Главная</a>
@@ -28,31 +30,35 @@
                     <a class="nav-link" href="contacts.html">Контакты</a>
                 </li>
             </ul>
-        </div>
+        </nav>
 
-        <div class="content">
-            <h1>Контакты</h1>
+        <main class="content">
+            <h1 class="profile-title">Контакты</h1>
 
-            <div class="contact-info">
-                <h2>Свяжитесь с нами</h2>
+            <section class="contacts-container">
+                <div class="contact-info">
+                    <h2 class="section-title">Свяжитесь с нами</h2>
 
-                <p><strong>Электронная почта:</strong></p>
-                <p><a href="mcdoni@gmail.com">info@example.com</a></p>
+                    <p><strong>Электронная почта:</strong></p>
+                    <p><a href="mailto:mcdoni@gmail.com">mcdoni@gmail.com</a></p>
 
-                <p><strong>Адрес:</strong></p>
-                <p>г. Москва, ул. Пушкина, д. Колотушкина, офис 123</p>
-                <p>123456, Россия</p>
+                    <p><strong>Адрес:</strong></p>
+                    <p>г. Москва, ул. Пушкина, д. Колотушкина, офис 123</p>
+                    <p>123456, Россия</p>
 
-                <p><strong>Телефон:</strong></p>
-                <p>+7 (495) 123-45-67</p>
+                    <p><strong>Телефон:</strong></p>
+                    <p>+7 (495) 123-45-67</p>
+                </div>
 
-                <button onclick="callMe()">Позвоните мне</button>
+                <button class="contact-button" onclick="callMe()">Позвоните мне</button>
 
-                <p><em>Нажмите кнопку "Позвоните мне", и мы перезвоним вам в ближайшее время</em></p>
-            </div>
-        </div>
+                <p class="experience-desc"><em>Нажмите кнопку "Позвоните мне", и мы перезвоним вам в ближайшее время</em></p>
+            </section>
+        </main>
 
-        <div class="footer">Футер</div>
+        <footer class="footer">
+            <p>Футер</p>
+        </footer>
 
         <script>
             function callMe() {
