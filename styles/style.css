@@ -223,7 +223,7 @@ a, button, input, textarea {
     padding-inline: clamp(var(--space-md), calc(0.5rem + 1vw), var(--space-xxl));
 }
 
-/* ===== ПРОФИЛЬ ===== */
+/* ===== ПРОФИЛЬ С ADAPTIVE IMAGES ===== */
 .profile {
     text-align: center;
     margin-bottom: var(--space-xxl);
@@ -236,13 +236,19 @@ a, button, input, textarea {
     font-weight: 300;
 }
 
+/* Адаптивное изображение профиля с picture element */
+.profile__picture {
+    margin: var(--space-lg) auto;
+    display: block;
+}
+
 .profile__photo {
     /* Адаптивный размер с фиксированным соотношением */
     width: clamp(150px, 22vw, 220px);
     height: clamp(190px, 28vw, 280px);
     border-radius: var(--border-radius-lg);
     object-fit: cover;
-    margin: var(--space-lg) auto;
+    margin: 0 auto;
     border: 4px solid var(--color-primary);
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
@@ -258,6 +264,14 @@ a, button, input, textarea {
     font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
     color: var(--color-text-light);
     margin: var(--space-xs) 0;
+}
+
+/* ===== БАЗОВОЕ АДАПТИВНОЕ ИЗОБРАЖЕНИЕ ===== */
+.responsive-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--border-radius-md);
 }
 
 /* ===== ОБО МНЕ ===== */
@@ -446,7 +460,7 @@ a, button, input, textarea {
     overflow-wrap: anywhere;
 }
 
-/* ===== ТОВАРЫ - АДАПТИВНАЯ GRID СЕТКА ===== */
+/* ===== ТОВАРЫ - АДАПТИВНАЯ GRID СЕТКА С OBJECT-FIT ===== */
 .products {
     margin: var(--space-xl) 0;
 }
@@ -476,6 +490,8 @@ a, button, input, textarea {
     border: 1px solid var(--color-light-dark);
     min-width: 0;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .product-card:hover {
@@ -501,12 +517,12 @@ a, button, input, textarea {
     font-weight: bold;
 }
 
+/* Object-fit для изображений товаров */
 .product-card__image {
     width: 100%;
-    max-width: 250px;
     height: 200px;
     border-radius: var(--border-radius-md);
-    object-fit: cover;
+    object-fit: cover; /* Сохраняет пропорции, заполняет контейнер */
     margin-bottom: var(--space-lg);
     border: 3px solid var(--color-light);
 }
@@ -517,6 +533,7 @@ a, button, input, textarea {
     margin: var(--space-sm) 0;
     font-weight: 600;
     overflow-wrap: anywhere;
+    flex-grow: 1;
 }
 
 .product-card__price {
@@ -536,6 +553,65 @@ a, button, input, textarea {
 .product-card__button {
     margin-top: var(--space-md);
     width: 100%;
+}
+
+/* ===== ADAPTIVE GALLERY ===== */
+.adaptive-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin: var(--space-lg) 0;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius-md);
+    aspect-ratio: 1 / 1; /* Квадратные элементы */
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-base);
+}
+
+.gallery-item:hover .gallery-image {
+    transform: scale(1.1);
+}
+
+/* ===== OBJECT-FIT ДЕМОНСТРАЦИЯ ===== */
+.object-fit-demo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin: var(--space-lg) 0;
+}
+
+.object-fit-item {
+    text-align: center;
+}
+
+.object-fit-item img {
+    width: 100%;
+    height: 200px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--space-sm);
+}
+
+.object-fit-cover {
+    object-fit: cover;
+}
+
+.object-fit-contain {
+    object-fit: contain;
+    background-color: var(--color-light);
+}
+
+.object-fit-fill {
+    object-fit: fill;
 }
 
 /* ===== КОНТАКТЫ И ФОРМЫ ===== */
@@ -574,6 +650,67 @@ a, button, input, textarea {
     color: var(--color-dark);
     margin-bottom: var(--space-md);
     text-align: center;
+}
+
+/* ===== ADAPTIVE FORMS ===== */
+.adaptive-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+    background: var(--color-light);
+    border-radius: var(--border-radius-lg);
+}
+
+.form-group {
+    margin-bottom: var(--space-lg);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--space-sm);
+    font-weight: 600;
+    color: var(--color-dark);
+}
+
+.form-input {
+    width: 100%;
+    padding: var(--space-md);
+    border: 2px solid var(--color-light-dark);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-base);
+    transition: border-color var(--transition-base);
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.form-textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Адаптивная таблица */
+.adaptive-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-lg) 0;
+    overflow-x: auto;
+    display: block;
+}
+
+.adaptive-table th,
+.adaptive-table td {
+    padding: var(--space-md);
+    border: 1px solid var(--color-light-dark);
+    text-align: left;
+}
+
+.adaptive-table th {
+    background-color: var(--color-light);
+    font-weight: 600;
 }
 
 /* ===== КНОПКИ С МИНИМАЛЬНОЙ ВЫСОТОЙ 44PX ===== */
@@ -689,6 +826,28 @@ dialog {
     .products__grid {
         gap: var(--space-lg);
     }
+
+    /* Адаптивная галерея */
+    .adaptive-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Object-fit демо */
+    .object-fit-demo {
+        grid-template-columns: 1fr;
+    }
+
+    /* Адаптивная таблица */
+    .adaptive-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Формы */
+    .form-input {
+        font-size: 16px; /* Предотвращает зум на iOS */
+    }
 }
 
 @media (max-width: 480px) {
@@ -703,6 +862,83 @@ dialog {
     .profile__photo {
         width: 120px;
         height: 160px;
+    }
+
+    /* Адаптивная галерея */
+    .adaptive-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    /* Товары */
+    .products__grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Формы на мобильных */
+    .adaptive-form {
+        padding: var(--space-md);
+    }
+
+    .form-group {
+        margin-bottom: var(--space-md);
+    }
+}
+
+/* Адаптивность для таблиц */
+@media (max-width: 600px) {
+    .adaptive-table {
+        display: block;
+    }
+
+    .adaptive-table thead {
+        display: none;
+    }
+
+    .adaptive-table tr {
+        display: block;
+        margin-bottom: var(--space-md);
+        border: 1px solid var(--color-light-dark);
+        border-radius: var(--border-radius-sm);
+    }
+
+    .adaptive-table td {
+        display: block;
+        text-align: right;
+        border: none;
+        border-bottom: 1px solid var(--color-light-dark);
+    }
+
+    .adaptive-table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: 600;
+        color: var(--color-dark);
+    }
+
+    .adaptive-table td:last-child {
+        border-bottom: none;
+    }
+}
+
+/* Планшетная адаптивность */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .products__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .adaptive-gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Высокие экраны */
+@media (min-height: 800px) and (min-width: 1200px) {
+    .product-card__image {
+        height: 250px;
+    }
+
+    .gallery-image {
+        height: 250px;
     }
 }
 
@@ -720,7 +956,8 @@ dialog {
     .experience-card:hover,
     .news-card:hover,
     .product-card:hover,
-    .button:hover {
+    .button:hover,
+    .gallery-image:hover {
         transform: none !important;
     }
 }
@@ -732,19 +969,10 @@ dialog {
     .product-card {
         border: 2px solid currentColor;
     }
-}
 
-/* ===== ВИЗУАЛЬНО СКРЫТЫЕ ЭЛЕМЕНТЫ ===== */
-.visually-hidden {
-    position: absolute !important;
-    width: 1px !important;
-    height: 1px !important;
-    padding: 0 !important;
-    margin: -1px !important;
-    overflow: hidden !important;
-    clip: rect(0, 0, 0, 0) !important;
-    white-space: nowrap !important;
-    border: 0 !important;
+    .form-input {
+        border-width: 3px;
+    }
 }
 
 /* ===== ТЕМНАЯ ТЕМА ===== */
@@ -879,6 +1107,17 @@ dialog {
         color: var(--color-text-light);
     }
 }
+
+/* ===== LAZY LOADING ===== */
+.lazy-image {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lazy-image.loaded {
+    opacity: 1;
+}
+
 /* ===== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ С ЭМОДЗИ ===== */
 .theme-switch {
     position: absolute;
@@ -913,7 +1152,6 @@ dialog {
     min-width: 24px;
     text-align: center;
 }
-
 /* Для светлой темы: солнце яркое, луна тусклая */
 :not(.theme-dark) .theme-switch__emoji:first-child {
     opacity: 1;
@@ -1048,4 +1286,64 @@ dialog {
 @keyframes emojiBounce {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.2); }
+}
+
+/* Адаптивность переключателя темы */
+@media (max-width: 768px) {
+    .theme-switch {
+        top: 15px;
+        right: 15px;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .nav,
+    .theme-switch,
+    .product-card__button,
+    .button {
+        display: none !important;
+    }
+
+    .page-container {
+        box-shadow: none;
+    }
+
+    .product-card,
+    .experience-card,
+    .news-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+
+    .adaptive-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ===== RETINA SUPPORT ===== */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .product-card__image,
+    .profile__photo,
+    .gallery-image {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* ===== ПОДДЕРЖКА СТАРЫХ БРАУЗЕРОВ ===== */
+@supports not (aspect-ratio: 1 / 1) {
+    .gallery-item {
+        height: 200px;
+    }
+}
+
+@supports not (object-fit: cover) {
+    .product-card__image,
+    .gallery-image {
+        width: auto;
+        max-width: 100%;
+        margin: 0 auto;
+    }
 }

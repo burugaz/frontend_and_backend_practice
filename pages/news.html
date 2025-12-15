@@ -4,69 +4,612 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Новости - Семестровая работа</title>
+    <meta name="description" content="Последние новости и события. Актуальная информация и обновления.">
     <link rel="stylesheet" href="../styles/style.css">
+    <style>
+        /* Контейнерные запросы для новостей */
+        .news__grid {
+            container-type: inline-size;
+            container-name: news-grid;
+        }
+
+        /* Адаптивные карточки новостей */
+        .news-card {
+            container-type: inline-size;
+            container-name: news-card;
+            background: var(--color-white);
+            padding: clamp(var(--space-lg), 5vw, var(--space-xl));
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-card);
+            border-left: 4px solid var(--color-primary);
+            transition: all var(--transition-base);
+            min-width: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover,
+        .news-card:focus-within {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card-hover);
+            border-left-color: var(--color-secondary);
+        }
+
+        .news-card__title {
+            font-size: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
+            color: var(--color-dark);
+            margin: 0 0 var(--space-sm) 0;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .news-card__meta {
+            color: var(--color-text-light);
+            font-size: clamp(0.875rem, 0.8125rem + 0.25vw, 0.95rem);
+            margin: 0 0 var(--space-md) 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .news-card__meta time {
+            font-weight: 600;
+        }
+
+        .news-card__meta .author {
+            font-style: italic;
+        }
+
+        .news-card__text {
+            color: var(--color-dark-light);
+            line-height: 1.7;
+            margin: 0 0 var(--space-sm) 0;
+            flex-grow: 1;
+        }
+
+        .news-card__read-more {
+            margin-top: var(--space-md);
+            align-self: flex-start;
+            font-weight: 600;
+            color: var(--color-primary);
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: all var(--transition-base);
+        }
+
+        .news-card__read-more:hover,
+        .news-card__read-more:focus {
+            border-bottom-color: var(--color-primary);
+        }
+
+        /* Контейнерные запросы */
+        @container news-grid (min-width: 600px) {
+            .news__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @container news-grid (min-width: 900px) {
+            .news__grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @container news-card (min-width: 300px) {
+            .news-card {
+                padding: var(--space-xl);
+            }
+        }
+
+        /* Адаптивное видео/медиа */
+        .news-media {
+            margin: var(--space-md) 0;
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+        }
+
+        .news-media img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+        }
+
+        /* Фильтр новостей */
+        .news-filter {
+            margin: var(--space-xl) 0;
+            padding: var(--space-lg);
+            background: var(--color-light);
+            border-radius: var(--border-radius-lg);
+        }
+
+        .news-filter__title {
+            font-size: clamp(1rem, 0.9375rem + 0.25vw, 1.125rem);
+            margin-bottom: var(--space-md);
+            color: var(--color-dark);
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+
+        .filter-button {
+            padding: var(--space-sm) var(--space-md);
+            background: var(--color-white);
+            border: 2px solid var(--color-light-dark);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+            transition: all var(--transition-base);
+        }
+
+        .filter-button:hover,
+        .filter-button:focus,
+        .filter-button.active {
+            background: var(--color-primary);
+            color: var(--color-white);
+            border-color: var(--color-primary);
+        }
+
+        /* Живые уведомления */
+        .live-notification {
+            position: sticky;
+            top: calc(60px + var(--safe-area-top));
+            z-index: 50;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: var(--color-white);
+            padding: var(--space-md);
+            border-radius: var(--border-radius-sm);
+            margin-bottom: var(--space-lg);
+            display: none;
+        }
+
+        .live-notification.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Анимации с учетом prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+            .news-card,
+            .filter-button,
+            .live-notification {
+                transition: none;
+            }
+
+            .news-card:hover {
+                transform: none;
+            }
+        }
+    </style>
 </head>
 <body>
     <a class="skip-link" href="#main">Перейти к основному содержимому</a>
+
     <div class="page-container">
-        <header class="header">
-            <h1 class="header__title">Хэдер</h1>
+        <header class="header" role="banner">
+            <h1 class="header__title">Новости</h1>
+            <div class="theme-switch">
+                <input type="checkbox" id="theme-toggle" class="theme-switch__checkbox"
+                       aria-label="Переключить тему">
+                <label for="theme-toggle" class="theme-switch__label">
+                    <span class="theme-switch__emoji" aria-hidden="true">☀️</span>
+                    <span class="theme-switch__slider">
+                        <span class="theme-switch__knob"></span>
+                    </span>
+                    <span class="theme-switch__emoji" aria-hidden="true">🌙</span>
+                    <span class="sr-only">Темная тема</span>
+                </label>
+            </div>
         </header>
 
-        <nav class="nav">
-            <ul class="nav__list">
-                <li class="nav__item">
-                    <a class="nav__link" href="../index.html">Главная</a>
+        <nav class="nav" aria-label="Основная навигация" role="navigation">
+            <ul class="nav__list" role="menubar">
+                <li class="nav__item" role="none">
+                    <a class="nav__link" href="../index.html" role="menuitem">Главная</a>
                 </li>
-                <li class="nav__item nav__item--active">
-                    <a class="nav__link" href="news.html">Новости</a>
+                <li class="nav__item nav__item--active" role="none">
+                    <a class="nav__link" href="news.html" role="menuitem" aria-current="page">Новости</a>
                 </li>
-                <li class="nav__item">
-                    <a class="nav__link" href="practices.html">Практики</a>
+                <li class="nav__item" role="none">
+                    <a class="nav__link" href="practices.html" role="menuitem">Практики</a>
                 </li>
-                <li class="nav__item">
-                    <a class="nav__link" href="goods.html">Товары</a>
+                <li class="nav__item" role="none">
+                    <a class="nav__link" href="goods.html" role="menuitem">Товары</a>
                 </li>
-                <li class="nav__item">
-                    <a class="nav__link" href="contacts.html">Контакты</a>
+                <li class="nav__item" role="none">
+                    <a class="nav__link" href="contacts.html" role="menuitem">Контакты</a>
                 </li>
             </ul>
         </nav>
 
-        <main id="main" class="main">
-            <h1 class="profile__title">Новости</h1>
+        <main id="main" class="main" role="main" tabindex="-1">
+            <header class="news-header" aria-labelledby="news-title">
+                <h1 id="news-title" class="profile__title">Новости</h1>
+                <p class="news-subtitle">Будьте в курсе последних событий и обновлений</p>
+            </header>
 
-            <section class="news">
-                <h2 class="news__title">Последние новости</h2>
+            <!-- Живое уведомление о новых новостях -->
+            <div id="live-notification" class="live-notification" role="alert" aria-live="polite" aria-atomic="true">
+                <p>Есть новые новости! Обновите страницу или нажмите кнопку ниже.</p>
+                <button onclick="loadNewNews()" class="button button--small" style="margin-top: 8px;">
+                    Загрузить новые новости
+                </button>
+            </div>
 
-                <div class="news__grid">
-                    <article class="news-card">
-                        <h3 class="news-card__title">Проблемы великого клуба</h3>
-                        <p class="news-card__meta">Дата публикации: 10.12.2025 | Автор: Дементьев А.А.</p>
-                        <p class="news-card__text">Реал Мадрид проиграл с позором, получив 2 удаления. Сможет ли клуб одолеть 2 салата оливье на новый год, вернуться с новыми силами и взять чемпионство?</p>
-                        <p class="news-card__text">Эксперты считают что винить стоит тренера</p>
+            <!-- Фильтр новостей -->
+            <section class="news-filter" aria-labelledby="filter-title">
+                <h2 id="filter-title" class="news-filter__title">Фильтр новостей</h2>
+                <div class="filter-controls" role="group" aria-label="Категории новостей">
+                    <button class="filter-button active" data-filter="all" aria-pressed="true">
+                        Все новости
+                    </button>
+                    <button class="filter-button" data-filter="sports" aria-pressed="false">
+                        Спорт
+                    </button>
+                    <button class="filter-button" data-filter="society" aria-pressed="false">
+                        Общество
+                    </button>
+                    <button class="filter-button" data-filter="tech" aria-pressed="false">
+                        Технологии
+                    </button>
+                </div>
+            </section>
+
+            <section class="news" aria-labelledby="latest-news-title">
+                <h2 id="latest-news-title" class="news__title">Последние новости</h2>
+
+                <div class="news__grid" role="list" aria-label="Список новостей">
+                    <article class="news-card" role="listitem" data-category="sports">
+                        <header>
+                            <h3 class="news-card__title">Проблемы великого клуба</h3>
+                            <div class="news-card__meta">
+                                <time datetime="2025-12-10">10.12.2025</time>
+                                <span class="author">Автор: Дементьев А.А.</span>
+                                <span class="category-badge">Спорт</span>
+                            </div>
+                        </header>
+
+                        <div class="news-media">
+                            <img src="../images/sports-club.jpg"
+                                 alt="Футбольный стадион с командой на поле"
+                                 loading="lazy">
+                        </div>
+
+                        <div class="news-card__content">
+                            <p class="news-card__text">Реал Мадрид проиграл с позором, получив 2 удаления. Сможет ли клуб одолеть 2 салата оливье на новый год, вернуться с новыми силами и взять чемпионство?</p>
+                            <p class="news-card__text">Эксперты считают что винить стоит тренера. Аналитики спортивного канала отмечают, что стратегические ошибки в последних матчах привели к серьезным последствиям для команды.</p>
+                        </div>
+
+                        <footer>
+                            <a href="#" class="news-card__read-more" aria-label="Читать подробнее о проблемах клуба">
+                                Читать подробнее →
+                            </a>
+                        </footer>
                     </article>
 
-                    <article class="news-card">
-                        <h3 class="news-card__title">Старую бабушку обманули на деньги</h3>
-                        <p class="news-card__meta">Дата публикации: 05.12.2025 | Автор: Петров П.П.</p>
-                        <p class="news-card__text">Бабушку из Москвы, которая увлекается пением, мошенники заставили обманом перевести деньги и даже продать квартиру, сможет ли она вернуть своё?</p>
+                    <article class="news-card" role="listitem" data-category="society">
+                        <header>
+                            <h3 class="news-card__title">Старую бабушку обманули на деньги</h3>
+                            <div class="news-card__meta">
+                                <time datetime="2025-12-05">05.12.2025</time>
+                                <span class="author">Автор: Петров П.П.</span>
+                                <span class="category-badge">Общество</span>
+                            </div>
+                        </header>
+
+                        <div class="news-media">
+                            <img src="../images/elderly-care.jpg"
+                                 alt="Пожилая женщина разговаривает по телефону"
+                                 loading="lazy">
+                        </div>
+
+                        <div class="news-card__content">
+                            <p class="news-card__text">Бабушку из Москвы, которая увлекается пением, мошенники заставили обманом перевести деньги и даже продать квартиру, сможет ли она вернуть своё?</p>
+                            <p class="news-card__text">Полиция уже ведет расследование по данному делу. Специалисты по кибербезопасности рекомендуют пожилым людям быть особенно осторожными при общении с незнакомцами по телефону.</p>
+                        </div>
+
+                        <footer>
+                            <a href="#" class="news-card__read-more" aria-label="Читать подробнее о случае мошенничества">
+                                Читать подробнее →
+                            </a>
+                        </footer>
                     </article>
 
-                    <article class="news-card">
-                        <h3 class="news-card__title">Заголовок третьей новости</h3>
-                        <p class="news-card__meta">Дата публикации: 01.12.2025 | Автор: Сидоров С.С.</p>
-                        <p class="news-card__text">Текст третьей новости. Минимум три новости на странице, как требуется в задании. Это может быть анонс мероприятий, обновлений или других важных событий.</p>
-                        <p class="news-card__text">Подробности и детали, которые помогут читателям лучше понять суть новости.</p>
+                    <article class="news-card" role="listitem" data-category="tech">
+                        <header>
+                            <h3 class="news-card__title">Новые технологии в веб-разработке</h3>
+                            <div class="news-card__meta">
+                                <time datetime="2025-12-01">01.12.2025</time>
+                                <span class="author">Автор: Сидоров С.С.</span>
+                                <span class="category-badge">Технологии</span>
+                            </div>
+                        </header>
+
+                        <div class="news-media">
+                            <img src="../images/web-tech.jpg"
+                                 alt="Программист работает за компьютером с кодом на экране"
+                                 loading="lazy">
+                        </div>
+
+                        <div class="news-card__content">
+                            <p class="news-card__text">В 2025 году ожидается революция в веб-разработке. Новые фреймворки и инструменты обещают сделать создание сайтов быстрее и доступнее.</p>
+                            <p class="news-card__text">Особое внимание уделяется доступности (a11y) и производительности. Контейнерные запросы, адаптивные изображения и современные CSS-техники становятся стандартом индустрии.</p>
+                        </div>
+
+                        <footer>
+                            <a href="#" class="news-card__read-more" aria-label="Читать о новых технологиях веб-разработки">
+                                Читать подробнее →
+                            </a>
+                        </footer>
+                    </article>
+
+                    <article class="news-card" role="listitem" data-category="sports">
+                        <header>
+                            <h3 class="news-card__title">Молодые таланты в футболе</h3>
+                            <div class="news-card__meta">
+                                <time datetime="2025-11-28">28.11.2025</time>
+                                <span class="author">Автор: Иванов И.И.</span>
+                                <span class="category-badge">Спорт</span>
+                            </div>
+                        </header>
+
+                        <div class="news-card__content">
+                            <p class="news-card__text">Российские футболисты показывают отличные результаты в молодежных чемпионатах Европы. Эксперты прогнозируют яркое будущее для отечественного футбола.</p>
+                        </div>
+
+                        <footer>
+                            <a href="#" class="news-card__read-more" aria-label="Читать о молодых футбольных талантах">
+                                Читать подробнее →
+                            </a>
+                        </footer>
+                    </article>
+
+                    <article class="news-card" role="listitem" data-category="society">
+                        <header>
+                            <h3 class="news-card__title">Городские улучшения</h3>
+                            <div class="news-card__meta">
+                                <time datetime="2025-11-25">25.11.2025</time>
+                                <span class="author">Автор: Смирнова А.В.</span>
+                                <span class="category-badge">Общество</span>
+                            </div>
+                        </header>
+
+                        <div class="news-media">
+                            <img src="../images/city-improvements.jpg"
+                                 alt="Современный городской парк с пешеходными дорожками"
+                                 loading="lazy">
+                        </div>
+
+                        <div class="news-card__content">
+                            <p class="news-card__text">В рамках программы городского развития планируется обновление парков и создание новых пешеходных зон. Жители активно участвуют в обсуждении проектов.</p>
+                        </div>
+
+                        <footer>
+                            <a href="#" class="news-card__read-more" aria-label="Читать о городских улучшениях">
+                                Читать подробнее →
+                            </a>
+                        </footer>
+                    </article>
+
+                    <article class="news-card" role="listitem" data-category="tech">
+                        <header>
+                            <h3 class="news-card__title">Искусственный интеллект в образовании</h3>
+                            <div class="news-card__meta">
+                                <time datetime="2025-11-20">20.11.2025</time>
+                                <span class="author">Автор: Козлов Д.С.</span>
+                                <span class="category-badge">Технологии</span>
+                            </div>
+                        </header>
+
+                        <div class="news-card__content">
+                            <p class="news-card__text">Внедрение AI-технологий в учебный процесс показывает promising результаты. Персонализированное обучение становится доступнее для студентов.</p>
+                        </div>
+
+                        <footer>
+                            <a href="#" class="news-card__read-more" aria-label="Читать об искусственном интеллекте в образовании">
+                                Читать подробнее →
+                            </a>
+                        </footer>
                     </article>
                 </div>
             </section>
+
+            <!-- Пагинация -->
+            <nav class="pagination" aria-label="Навигация по страницам новостей">
+                <ul class="pagination__list">
+                    <li class="pagination__item">
+                        <button class="pagination__link pagination__link--disabled" aria-label="Предыдущая страница" disabled>
+                            ← Назад
+                        </button>
+                    </li>
+                    <li class="pagination__item">
+                        <button class="pagination__link pagination__link--active" aria-label="Страница 1" aria-current="page">
+                            1
+                        </button>
+                    </li>
+                    <li class="pagination__item">
+                        <button class="pagination__link" aria-label="Страница 2">
+                            2
+                        </button>
+                    </li>
+                    <li class="pagination__item">
+                        <button class="pagination__link" aria-label="Страница 3">
+                            3
+                        </button>
+                    </li>
+                    <li class="pagination__item">
+                        <button class="pagination__link" aria-label="Следующая страница">
+                            Вперед →
+                        </button>
+                    </li>
+                </ul>
+            </nav>
         </main>
 
-        <footer class="footer">
-            <p class="footer__text">Футер</p>
+        <footer class="footer" role="contentinfo">
+            <p class="footer__text">© 2024 Семестровая работа. Все права защищены.</p>
         </footer>
     </div>
+
     <script src="../js/theme.js"></script>
+    <script>
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            initNewsFilter();
+            initAccessibility();
+            simulateLiveUpdates();
+        });
+
+        // Фильтрация новостей
+        function initNewsFilter() {
+            const filterButtons = document.querySelectorAll('.filter-button');
+            const newsCards = document.querySelectorAll('.news-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.dataset.filter;
+
+                    // Обновляем состояние кнопок
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-pressed', 'false');
+                    });
+                    this.classList.add('active');
+                    this.setAttribute('aria-pressed', 'true');
+
+                    // Фильтруем новости
+                    newsCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+
+                    // Обновляем заголовок для скринридеров
+                    const filterTitle = document.getElementById('filter-title');
+                    filterTitle.textContent = filter === 'all' ? 'Фильтр новостей' : `Новости: ${this.textContent.trim()}`;
+                });
+            });
+        }
+
+        // Симуляция живых обновлений
+        function simulateLiveUpdates() {
+            const notification = document.getElementById('live-notification');
+
+            // Показываем уведомление через 10 секунд
+            setTimeout(() => {
+                notification.classList.add('show');
+
+                // Скрываем через 15 секунд
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 15000);
+            }, 10000);
+        }
+
+        // Загрузка новых новостей
+        function loadNewNews() {
+            const notification = document.getElementById('live-notification');
+            notification.innerHTML = '<p>Загрузка новых новостей...</p>';
+
+            // Симуляция загрузки
+            setTimeout(() => {
+                notification.innerHTML = `
+                    <p>Новые новости успешно загружены!</p>
+                    <button onclick="location.reload()" class="button button--small" style="margin-top: 8px;">
+                        Обновить страницу
+                    </button>
+                `;
+            }, 1500);
+        }
+
+        // Инициализация доступности
+        function initAccessibility() {
+            // Добавляем клавиатурную навигацию для карточек
+            const newsCards = document.querySelectorAll('.news-card');
+            newsCards.forEach(card => {
+                card.setAttribute('tabindex', '0');
+
+                card.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        const link = this.querySelector('.news-card__read-more');
+                        if (link) link.click();
+                    }
+                });
+            });
+
+            // Пагинация с клавиатурной навигацией
+            const paginationButtons = document.querySelectorAll('.pagination__link:not([disabled])');
+            paginationButtons.forEach((button, index) => {
+                button.addEventListener('keydown', function(event) {
+                    if (event.key === 'ArrowRight') {
+                        event.preventDefault();
+                        const nextIndex = Math.min(index + 1, paginationButtons.length - 1);
+                        paginationButtons[nextIndex].focus();
+                    } else if (event.key === 'ArrowLeft') {
+                        event.preventDefault();
+                        const prevIndex = Math.max(index - 1, 0);
+                        paginationButtons[prevIndex].focus();
+                    }
+                });
+            });
+
+            // Ленивая загрузка изображений
+            const lazyImages = document.querySelectorAll('.news-media img[loading="lazy"]');
+
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src || img.src;
+                            img.classList.add('loaded');
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+
+                lazyImages.forEach(img => imageObserver.observe(img));
+            }
+        }
+
+        // Обновление безопасных областей
+        function updateSafeAreas() {
+            const header = document.querySelector('.header');
+            const main = document.querySelector('.main');
+
+            if (CSS.supports('padding-top', 'env(safe-area-inset-top)')) {
+                const safeAreaTop = env('safe-area-inset-top');
+                const safeAreaBottom = env('safe-area-inset-bottom');
+
+                header.style.paddingTop = `calc(var(--space-xl) + ${safeAreaTop})`;
+                main.style.paddingBottom = `calc(var(--space-xl) + ${safeAreaBottom})`;
+            }
+        }
+
+        // Слушаем изменения ориентации
+        window.addEventListener('orientationchange', updateSafeAreas);
+        window.addEventListener('resize', updateSafeAreas);
+
+        // Инициализация
+        updateSafeAreas();
+    </script>
 </body>
 </html>

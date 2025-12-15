@@ -6,9 +6,10 @@
     <title>Контакты - Семестровая работа</title>
     <link rel="stylesheet" href="../styles/style.css">
     <style>
-    /* Стили для модального окна (используем CSS переменные) */
+        /* Адаптивные стили для модального окна */
         dialog::backdrop {
             background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(2px);
         }
 
         dialog {
@@ -16,17 +17,17 @@
             border-radius: var(--border-radius-md);
             padding: 0;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
-            width: 90vw;
+            max-width: min(500px, 90vw);
             max-height: 90vh;
             overflow-y: auto;
             animation: slideIn 0.3s ease;
-            /* ИСПРАВЛЕНО: центрирование окна */
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             margin: 0;
+            background: var(--color-white);
+            color: var(--color-text);
         }
 
         @keyframes slideIn {
@@ -46,12 +47,38 @@
             padding: var(--spacing-lg);
             border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
             margin: 0;
+            position: relative;
         }
 
         .modal-header h2 {
             margin: 0;
             color: var(--color-white);
             font-size: var(--font-size-lg);
+        }
+
+        .close-button {
+            position: absolute;
+            top: 50%;
+            right: var(--spacing-lg);
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--color-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            background: rgba(255, 255, 255, 0.1);
+            outline: 2px solid var(--color-white);
         }
 
         .modal-content {
@@ -67,6 +94,12 @@
             margin-bottom: var(--spacing-sm);
             font-weight: 600;
             color: var(--color-dark);
+            font-size: var(--font-size-base);
+        }
+
+        .required-label::after {
+            content: " *";
+            color: var(--color-danger);
         }
 
         .form-group input,
@@ -79,6 +112,8 @@
             font-size: var(--font-size-base);
             transition: border-color var(--transition-base);
             box-sizing: border-box;
+            background: var(--color-white);
+            color: var(--color-text);
         }
 
         .form-group input:focus,
@@ -86,11 +121,29 @@
         .form-group textarea:focus {
             outline: none;
             border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
         .form-group textarea {
-            min-height: 100px;
+            min-height: 120px;
             resize: vertical;
+        }
+
+        .error-message {
+            color: var(--color-danger);
+            font-size: var(--font-size-sm);
+            margin-top: var(--spacing-xs);
+            display: none;
+        }
+
+        .form-group.error input,
+        .form-group.error select,
+        .form-group.error textarea {
+            border-color: var(--color-danger);
+        }
+
+        .form-group.error .error-message {
+            display: block;
         }
 
         .modal-actions {
@@ -98,21 +151,49 @@
             gap: var(--spacing-md);
             justify-content: flex-end;
             margin-top: var(--spacing-xl);
+            flex-wrap: wrap;
         }
 
-        .required {
+        .required-note {
             color: var(--color-danger);
+            font-size: var(--font-size-sm);
+            margin-top: var(--spacing-md);
+            text-align: center;
         }
 
-        @media (max-width: 600px) {
-            dialog {
-                margin: 0;
-                width: calc(100vw - 2rem);
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
+        /* Уведомление об успешной отправке */
+        #success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--color-success);
+            color: var(--color-white);
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--border-radius-sm);
+            box-shadow: var(--shadow-md);
+            z-index: 10000;
+            display: none;
+            max-width: 300px;
+        }
 
+        #success-message.show {
+            display: block;
+            animation: slideInRight 0.3s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 600px) {
             .modal-actions {
                 flex-direction: column;
             }
@@ -120,129 +201,479 @@
             .modal-actions .button {
                 width: 100%;
             }
+
+            .close-button {
+                position: static;
+                transform: none;
+                margin-top: var(--spacing-md);
+                align-self: flex-end;
+            }
         }
-</style>
+
+        /* Высокий контраст */
+        @media (prefers-contrast: high) {
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                border-width: 3px;
+            }
+
+            .close-button {
+                border: 2px solid currentColor;
+            }
+        }
+    </style>
 </head>
 <body>
     <a class="skip-link" href="#main">Перейти к основному содержимому</a>
+
     <div class="page-container">
         <header class="header">
-            <h1 class="header__title">Хэдер</h1>
+            <h1 class="header__title">Контакты</h1>
         </header>
 
-        <nav class="nav">
-            <ul class="nav__list">
-                <li class="nav__item">
-                    <a class="nav__link" href="../index.html">Главная</a>
+        <nav class="nav" aria-label="Основная навигация">
+            <ul class="nav__list" role="menubar">
+                <li class="nav__item" role="none">
+                    <a class="nav__link" href="../index.html" role="menuitem">Главная</a>
                 </li>
-                <li class="nav__item">
-                    <a class="nav__link" href="news.html">Новости</a>
+                <li class="nav__item" role="none">
+                    <a class="nav__link" href="news.html" role="menuitem">Новости</a>
                 </li>
-                <li class="nav__item">
-                    <a class="nav__link" href="practices.html">Практики</a>
+                <li class="nav__item" role="none">
+                    <a class="nav__link" href="practices.html" role="menuitem">Практики</a>
                 </li>
-                <li class="nav__item">
-                    <a class="nav__link" href="goods.html">Товары</a>
+                <li class="nav__item" role="none">
+                    <a class="nav__link" href="goods.html" role="menuitem">Товары</a>
                 </li>
-                <li class="nav__item nav__item--active">
-                    <a class="nav__link" href="contacts.html">Контакты</a>
+                <li class="nav__item nav__item--active" role="none">
+                    <a class="nav__link" href="contacts.html" role="menuitem" aria-current="page">Контакты</a>
                 </li>
             </ul>
         </nav>
 
-        <main id="main" class="main">
+        <main id="main" class="main" tabindex="-1">
             <h1 class="profile__title">Контакты</h1>
 
-            <section class="contacts">
-                <h2 class="contacts__title">Свяжитесь с нами</h2>
+            <section class="contacts" aria-labelledby="contacts-title">
+                <h2 id="contacts-title" class="contacts__title">Свяжитесь с нами</h2>
 
                 <div class="contacts__container">
-                    <div class="contact-info">
-                        <h3 class="contact-info__title">Контактная информация</h3>
+                    <div class="contact-info" aria-labelledby="contact-info-title">
+                        <h3 id="contact-info-title" class="contact-info__title">Контактная информация</h3>
 
-                        <p><strong>Электронная почта:</strong></p>
-                        <p><a href="mailto:mcdoni@gmail.com">mcdoni@gmail.com</a></p>
+                        <address>
+                            <p><strong>Электронная почта:</strong></p>
+                            <p><a href="mailto:mcdoni@gmail.com">mcdoni@gmail.com</a></p>
 
-                        <p><strong>Адрес:</strong></p>
-                        <p>г. Москва, ул. Пушкина, д. Колотушкина, офис 123</p>
-                        <p>123456, Россия</p>
+                            <p><strong>Адрес:</strong></p>
+                            <p>г. Москва, ул. Пушкина, д. Колотушкина, офис 123</p>
+                            <p>123456, Россия</p>
 
-                        <p><strong>Телефон:</strong></p>
-                        <p>+7 (495) 123-45-67</p>
+                            <p><strong>Телефон:</strong></p>
+                            <p><a href="tel:+74951234567">+7 (495) 123-45-67</a></p>
+                        </address>
                     </div>
 
                     <!-- Кнопка для открытия модального окна -->
-                    <button class="button button--primary" onclick="document.getElementById('contactModal').showModal()">
+                    <button class="button button--primary"
+                            onclick="openModal()"
+                            aria-haspopup="dialog"
+                            aria-controls="contactModal">
                         Связаться с нами
                     </button>
 
-                    <p class="about__text"><em>Нажмите кнопку "Связаться с нами", чтобы открыть форму обратной связи</em></p>
+                    <p class="about__text">
+                        <em>Нажмите кнопку "Связаться с нами", чтобы открыть форму обратной связи</em>
+                    </p>
                 </div>
             </section>
         </main>
 
-        <footer class="footer">
-            <p class="footer__text">Футер</p>
+        <footer class="footer" role="contentinfo">
+            <p class="footer__text">© 2024 Семестровая работа. Все права защищены.</p>
         </footer>
 
         <!-- Модальное окно для формы обратной связи -->
-        <dialog id="contactModal">
+        <dialog id="contactModal"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description">
             <div class="modal-header">
-                <h2>Форма обратной связи</h2>
+                <h2 id="modal-title">Форма обратной связи</h2>
+                <p id="modal-description" class="sr-only">Заполните форму, чтобы связаться с нами</p>
+                <button class="close-button"
+                        onclick="closeModal()"
+                        aria-label="Закрыть диалоговое окно">
+                    ×
+                </button>
             </div>
 
             <div class="modal-content">
-                <form id="feedbackForm">
-                    <div class="form-group">
-                        <label for="name">Имя <span class="required">*</span></label>
-                        <input type="text" id="name" name="name" required placeholder="Введите ваше имя">
-                    </div>
+                <form id="feedbackForm"
+                      novalidate
+                      aria-labelledby="modal-title">
 
-                    <div class="form-group">
-                        <label for="phone">Телефон <span class="required">*</span></label>
-                        <input type="tel" id="phone" name="phone" required placeholder="+7 (XXX) XXX-XX-XX">
-                    </div>
+                    <fieldset>
+                        <legend class="sr-only">Персональная информация</legend>
 
-                    <div class="form-group">
-                        <label for="email">Электронная почта <span class="required">*</span></label>
-                        <input type="email" id="email" name="email" required placeholder="example@mail.ru">
-                    </div>
+                        <div class="form-group">
+                            <label for="name" class="required-label">
+                                Имя
+                            </label>
+                            <input type="text"
+                                   id="name"
+                                   name="name"
+                                   required
+                                   aria-required="true"
+                                   aria-invalid="false"
+                                   aria-describedby="name-error"
+                                   placeholder="Введите ваше имя">
+                            <div id="name-error" class="error-message" role="alert">
+                                Пожалуйста, введите ваше имя
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="category">Категория обращения <span class="required">*</span></label>
-                        <select id="category" name="category" required>
-                            <option value="">Выберите категорию</option>
-                            <option value="technical">Техническая поддержка</option>
-                            <option value="commercial">Коммерческое предложение</option>
-                            <option value="cooperation">Сотрудничество</option>
-                            <option value="complaint">Жалоба</option>
-                            <option value="suggestion">Предложение</option>
-                            <option value="other">Другое</option>
-                        </select>
-                    </div>
+                        <div class="form-group">
+                            <label for="phone" class="required-label">
+                                Телефон
+                            </label>
+                            <input type="tel"
+                                   id="phone"
+                                   name="phone"
+                                   required
+                                   aria-required="true"
+                                   aria-invalid="false"
+                                   aria-describedby="phone-error"
+                                   placeholder="+7 (XXX) XXX-XX-XX"
+                                   pattern="\+7\s?[\(]?\d{3}[\)]?\s?\d{3}[-]?\d{2}[-]?\d{2}">
+                            <div id="phone-error" class="error-message" role="alert">
+                                Введите телефон в формате +7 (XXX) XXX-XX-XX
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="message">Текст обращения <span class="required">*</span></label>
-                        <textarea id="message" name="message" required placeholder="Опишите вашу проблему или вопрос..."></textarea>
-                    </div>
+                        <div class="form-group">
+                            <label for="email" class="required-label">
+                                Электронная почта
+                            </label>
+                            <input type="email"
+                                   id="email"
+                                   name="email"
+                                   required
+                                   aria-required="true"
+                                   aria-invalid="false"
+                                   aria-describedby="email-error"
+                                   placeholder="example@mail.ru">
+                            <div id="email-error" class="error-message" role="alert">
+                                Введите корректный email адрес
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="sr-only">Детали обращения</legend>
+
+                        <div class="form-group">
+                            <label for="category" class="required-label">
+                                Категория обращения
+                            </label>
+                            <select id="category"
+                                    name="category"
+                                    required
+                                    aria-required="true"
+                                    aria-invalid="false"
+                                    aria-describedby="category-error">
+                                <option value="">Выберите категорию</option>
+                                <option value="technical">Техническая поддержка</option>
+                                <option value="commercial">Коммерческое предложение</option>
+                                <option value="cooperation">Сотрудничество</option>
+                                <option value="complaint">Жалоба</option>
+                                <option value="suggestion">Предложение</option>
+                                <option value="other">Другое</option>
+                            </select>
+                            <div id="category-error" class="error-message" role="alert">
+                                Пожалуйста, выберите категорию обращения
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="required-label">
+                                Текст обращения
+                            </label>
+                            <textarea id="message"
+                                      name="message"
+                                      required
+                                      aria-required="true"
+                                      aria-invalid="false"
+                                      aria-describedby="message-error"
+                                      placeholder="Опишите вашу проблему или вопрос..."></textarea>
+                            <div id="message-error" class="error-message" role="alert">
+                                Пожалуйста, введите текст обращения
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <p class="required-note" aria-hidden="true">
+                        * Поля, обязательные для заполнения
+                    </p>
 
                     <div class="modal-actions">
-                        <!-- Кнопка закрытия окна -->
-                        <button type="button" class="button button--secondary"
-                                onclick="document.getElementById('contactModal').close()">
+                        <button type="button"
+                                class="button button--secondary"
+                                onclick="closeModal()"
+                                aria-label="Отменить отправку формы">
                             Отмена
                         </button>
 
-                        <!-- Кнопка "отправки" с простым сообщением -->
-                        <button type="button" class="button button--primary"
-                                onclick="alert('Спасибо! Ваше обращение отправлено. Мы свяжемся с вами в ближайшее время.'); document.getElementById('contactModal').close();">
+                        <button type="submit"
+                                class="button button--primary"
+                                aria-label="Отправить форму обратной связи">
                             Отправить
                         </button>
                     </div>
                 </form>
             </div>
         </dialog>
+
+        <!-- Уведомление об успешной отправке -->
+        <div id="success-message"
+             role="status"
+             aria-live="polite"
+             aria-atomic="true">
+            Спасибо! Ваше обращение отправлено.
+        </div>
     </div>
+
     <script src="../js/theme.js"></script>
+    <script>
+        // Переменные для управления фокусом
+        let previousActiveElement = null;
+        const modal = document.getElementById('contactModal');
+        const openModalButton = document.querySelector('[aria-controls="contactModal"]');
+        const closeModalButton = document.querySelector('.close-button');
+        const form = document.getElementById('feedbackForm');
+        const successMessage = document.getElementById('success-message');
+
+        // Класс для скрытых элементов
+        const srOnlyCSS = `
+            .sr-only {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                white-space: nowrap;
+                border: 0;
+            }
+        `;
+        const style = document.createElement('style');
+        style.textContent = srOnlyCSS;
+        document.head.appendChild(style);
+
+        // Функция открытия модального окна
+        function openModal() {
+            previousActiveElement = document.activeElement;
+            modal.showModal();
+
+            // Фокусируемся на первом поле ввода
+            document.getElementById('name').focus();
+
+            // Добавляем обработчики для клавиатуры
+            document.addEventListener('keydown', handleEscape);
+            modal.addEventListener('keydown', trapFocus);
+
+            // Скрываем основной контент от скринридера
+            document.querySelectorAll('main > *').forEach(el => {
+                if (!el.closest('dialog')) {
+                    el.setAttribute('aria-hidden', 'true');
+                }
+            });
+        }
+
+        // Функция закрытия модального окна
+        function closeModal() {
+            modal.close();
+
+            // Возвращаем фокус
+            if (previousActiveElement) {
+                previousActiveElement.focus();
+            }
+
+            // Убираем обработчики
+            document.removeEventListener('keydown', handleEscape);
+            modal.removeEventListener('keydown', trapFocus);
+
+            // Возвращаем видимость основному контенту
+            document.querySelectorAll('[aria-hidden="true"]').forEach(el => {
+                el.removeAttribute('aria-hidden');
+            });
+
+            // Сбрасываем форму
+            form.reset();
+            clearErrors();
+        }
+
+        // Обработка клавиши Escape
+        function handleEscape(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        }
+
+        // Захват фокуса внутри модального окна
+        function trapFocus(event) {
+            if (event.key !== 'Tab') return;
+
+            const focusableElements = modal.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            if (event.shiftKey && document.activeElement === firstElement) {
+                event.preventDefault();
+                lastElement.focus();
+            } else if (!event.shiftKey && document.activeElement === lastElement) {
+                event.preventDefault();
+                firstElement.focus();
+            }
+        }
+
+        // Очистка ошибок
+        function clearErrors() {
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('error');
+                const errorMessage = group.querySelector('.error-message');
+                if (errorMessage) {
+                    errorMessage.style.display = 'none';
+                }
+            });
+
+            document.querySelectorAll('[aria-invalid="true"]').forEach(el => {
+                el.setAttribute('aria-invalid', 'false');
+            });
+        }
+
+        // Валидация формы
+        function validateForm() {
+            let isValid = true;
+            clearErrors();
+
+            // Проверка имени
+            const nameInput = document.getElementById('name');
+            if (!nameInput.value.trim()) {
+                showError(nameInput, 'Пожалуйста, введите ваше имя');
+                isValid = false;
+            }
+
+            // Проверка телефона
+            const phoneInput = document.getElementById('phone');
+            const phoneRegex = /^\+7\s?[\(]?\d{3}[\)]?\s?\d{3}[-]?\d{2}[-]?\d{2}$/;
+            if (!phoneRegex.test(phoneInput.value.trim())) {
+                showError(phoneInput, 'Введите телефон в формате +7 (XXX) XXX-XX-XX');
+                isValid = false;
+            }
+
+            // Проверка email
+            const emailInput = document.getElementById('email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput.value.trim())) {
+                showError(emailInput, 'Введите корректный email адрес');
+                isValid = false;
+            }
+
+            // Проверка категории
+            const categorySelect = document.getElementById('category');
+            if (!categorySelect.value) {
+                showError(categorySelect, 'Пожалуйста, выберите категорию обращения');
+                isValid = false;
+            }
+
+            // Проверка сообщения
+            const messageInput = document.getElementById('message');
+            if (!messageInput.value.trim()) {
+                showError(messageInput, 'Пожалуйста, введите текст обращения');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // Показать ошибку
+        function showError(input, message) {
+            const formGroup = input.closest('.form-group');
+            formGroup.classList.add('error');
+
+            const errorMessage = formGroup.querySelector('.error-message');
+            if (errorMessage) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+            }
+
+            input.setAttribute('aria-invalid', 'true');
+            input.focus();
+        }
+
+        // Показать успешное сообщение
+        function showSuccessMessage() {
+            successMessage.classList.add('show');
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 5000);
+        }
+
+        // Обработка отправки формы
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            if (validateForm()) {
+                // В реальном приложении здесь был бы AJAX запрос
+                showSuccessMessage();
+                closeModal();
+
+                // Симулируем отправку
+                setTimeout(() => {
+                    alert('Спасибо! Ваше обращение отправлено. Мы свяжемся с вами в ближайшее время.');
+                }, 100);
+            }
+        });
+
+        // Реальная валидация при вводе
+        document.querySelectorAll('#feedbackForm input, #feedbackForm select, #feedbackForm textarea').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value.trim()) {
+                    this.closest('.form-group').classList.remove('error');
+                    this.setAttribute('aria-invalid', 'false');
+
+                    const errorMessage = this.closest('.form-group').querySelector('.error-message');
+                    if (errorMessage) {
+                        errorMessage.style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        // Автофокус при открытии модального окна по клавиатуре
+        openModalButton.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openModal();
+            }
+        });
+
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            // Добавляем ARIA-label для кнопки открытия модального окна
+            openModalButton.setAttribute('aria-label', 'Открыть форму обратной связи');
+
+            // Устанавливаем начальные ARIA-атрибуты
+            document.querySelectorAll('[required]').forEach(input => {
+                input.setAttribute('aria-required', 'true');
+            });
+        });
+    </script>
 </body>
 </html>
